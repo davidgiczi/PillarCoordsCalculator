@@ -1,14 +1,12 @@
 package mvmxpert.david.giczi.pillarcoordscalculator.domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.Test;
 
-public class AzimuthAndDistanceCalculator {
+public class AzimuthAndDistance {
 	
 	private Point pointA;
 	private Point pointB;
 	
-	public AzimuthAndDistanceCalculator(Point pointA, Point pointB) {	
+	public AzimuthAndDistance(Point pointA, Point pointB) {	
 		this.pointA = pointA;
 		this.pointB = pointB;
 	}
