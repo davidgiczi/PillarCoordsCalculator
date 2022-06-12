@@ -30,9 +30,16 @@ public class Point {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Point [pointID=" + pointID + ", x_coord=" + x_coord + ", y_coord=" + y_coord + "]";
+	public String writePointForRTK() {
+		return this.pointID + "," + this.x_coord + "," + this.y_coord + ",0";
+	}
+	
+	public String writePointForTPS() {
+		return this.pointID + ";" + this.x_coord + ";" + this.y_coord + ";0;;";
+	}
+	
+	public String writePointForKML() {
+		return this.pointID + " " + this.x_coord + " " + this.y_coord + " 0";
 	}
 	
 }
