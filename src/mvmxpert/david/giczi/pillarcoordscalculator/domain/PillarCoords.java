@@ -88,6 +88,7 @@ public class PillarCoords {
 		calculatePointsOfLeftAndDownHole();
 		calculatePointsOfRightAndDownHole();
 		calculatePointsOfRightAndUpHole();
+		rotatePillarCoords();
 	}
 	
 	private void calculatePointsOnAxises() {
@@ -196,6 +197,12 @@ public class PillarCoords {
 				verticalSizeOfHoleOfPillarLeg,
 				azimuth + 3 * Math.PI / 2, pillarCenterPoint.getPointID() + "_24");
 		pillarPoints.add(point24.calcPolarPoint());
+	}
+	
+	private void rotatePillarCoords() {
+		if( rotation == 0) {
+			return;
+		}
 	}
 	
 }

@@ -18,8 +18,8 @@ public class PillarCoordsCalculator {
 		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(4);
 		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(4);
 		pillarCoords.calculatePillarPoints();
-		FileProcess file = new FileProcess("58_oszlop_kit");
-		file.saveDataForKML(pillarCoords.getPillarPoints());
+		FileProcess file = new FileProcess("Csomor_58_oszlop_kit");
+		file.saveDataForKML(pillarCoords.getPillarPoints().get(0));
 		file.saveDataForRTK(pillarCoords.getPillarPoints());
 		file.saveDataForTPS(pillarCoords.getPillarPoints());
 	}

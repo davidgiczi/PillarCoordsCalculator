@@ -17,18 +17,16 @@ public class FileProcess {
 
 	private static String FILE_PATH = "C:/Users/User/Documents/docs/MVMXPert/_FOR_PILLAR";
 	
-	public void saveDataForKML(List<Point> points) {
+	public void saveDataForKML(Point pillarCenter) {
 		
 		File file = new File(FILE_PATH + "/" + projectName + "_KML.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
 			
-			for (Point point : points) {
-				writer.write(point.writePointForKML());
+				writer.write(pillarCenter.writePointForKML());
 				writer.newLine();
-			}
-					
+		
 		} catch (IOException e) {
 			System.out.println( "\'"+ file.getName() + "\' file cannot be created.");
 			e.printStackTrace();
