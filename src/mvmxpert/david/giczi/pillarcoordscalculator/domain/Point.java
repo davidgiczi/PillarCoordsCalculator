@@ -51,4 +51,10 @@ public class Point {
 		return this.pointID + " " + this.x_coord + " " + this.y_coord + " 0";
 	}
 	
+	public String writePointForMS() {
+		return this.pointID + " " + this.x_coord + " " + this.y_coord + " 0";
+	}
+	
+	
+	
 }

@@ -1,6 +1,5 @@
 package mvmxpert.david.giczi.pillarcoordscalculator.domain;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.management.InvalidAttributeValueException;
@@ -115,7 +114,7 @@ public class PillarCoordsForWeightBase {
 	public void calculatePillarPoints() {
 		this.pillarPoints = new ArrayList<>();
 		pillarPoints.add(pillarCenterPoint);
-		calculatePointsOnAxises();
+		calculatePointsOnAxis();
 		calculatePointsOfLeftAndUpHole();
 		calculatePointsOfLeftAndDownHole();
 		calculatePointsOfRightAndDownHole();
@@ -124,7 +123,7 @@ public class PillarCoordsForWeightBase {
 		rotatePillarCoords();
 	}
 	
-	private void calculatePointsOnAxises() {
+	private void calculatePointsOnAxis() {
 		
 		PolarPoint point1 = new PolarPoint(pillarCenterPoint, distanceOnTheAxis,
 				azimuth, pillarCenterPoint.getPointID() + "_1");
@@ -258,13 +257,10 @@ public class PillarCoordsForWeightBase {
 						(pillarPoints.get(i).getY_coord() - pillarPoints.get(0).getY_coord()) * Math.sin(radRotation);
 			double rotated_y = (pillarPoints.get(i).getX_coord() - pillarPoints.get(0).getX_coord()) * Math.sin(radRotation) +
 						(pillarPoints.get(i).getY_coord() - pillarPoints.get(0).getY_coord()) * Math.cos(radRotation);
-			DecimalFormat formatter = new DecimalFormat("###.###");
 			pillarPoints.get(i)
-			.setX_coord(pillarPoints.get(0).getX_coord() + 
-					Double.parseDouble(formatter.format(rotated_x).replace(',', '.')));
+			.setX_coord(Math.round((pillarPoints.get(0).getX_coord() + rotated_x) * 1000.0) / 1000.0);
 			pillarPoints.get(i)
-			.setY_coord(pillarPoints.get(0).getY_coord() + 
-					Double.parseDouble(formatter.format(rotated_y).replace(',', '.')));		
+			.setY_coord(Math.round((pillarPoints.get(0).getY_coord() + rotated_y) * 1000.0) / 1000.0);
 	}
 }
 	

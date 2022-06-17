@@ -69,4 +69,21 @@ public class FileProcess {
 		}
 	}
 	
+	public void saveDataForMS(List<Point> points) {
+		
+		File file = new File(FILE_PATH + "/" + projectName + "_MS.txt");
+		
+		try(BufferedWriter writer = new BufferedWriter(
+				new FileWriter(file, true))) {
+			
+			for (Point point : points) {
+				writer.write(point.writePointForMS());
+				writer.newLine();
+			}
+					
+		} catch (IOException e) {
+			System.out.println( "\'"+ file.getName() + "\' file cannot be created.");
+			e.printStackTrace();
+		}
+	}
 }

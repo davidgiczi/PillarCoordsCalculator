@@ -1,6 +1,5 @@
 package mvmxpert.david.giczi.pillarcoordscalculator.domain;
 
-import java.text.DecimalFormat;
 
 public class PolarPoint {
 
@@ -21,10 +20,9 @@ public class PolarPoint {
 		
 		double newPointX = pointA.getX_coord() + Math.sin(azimuth) * distance;
 		double newPointY = pointA.getY_coord() + Math.cos(azimuth) * distance;
-		DecimalFormat formatter = new DecimalFormat("###.###");
 		return new Point(newPointID, 
-				Double.parseDouble(formatter.format(newPointX).replace(',', '.')),
-				Double.parseDouble(formatter.format(newPointY).replace(',', '.')));
+				Math.round(newPointX * 1000.0) / 1000.0,
+				Math.round(newPointY * 1000.0) / 1000.0);
 	}
 
 	public Point getPointA() {
