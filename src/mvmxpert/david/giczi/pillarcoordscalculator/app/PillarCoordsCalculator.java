@@ -1,7 +1,7 @@
 package mvmxpert.david.giczi.pillarcoordscalculator.app;
 
 import javax.management.InvalidAttributeValueException;
-import mvmxpert.david.giczi.pillarcoordscalculator.domain.PillarCoords;
+import mvmxpert.david.giczi.pillarcoordscalculator.domain.PillarCoordsForWeightBase;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 import mvmxpert.david.giczi.pillarcoordscalculator.fileprocess.FileProcess;
 
@@ -9,16 +9,18 @@ public class PillarCoordsCalculator {
 
 	public static void main(String[] args) throws InvalidAttributeValueException {
 		
-		Point center = new Point("58", 659249.8588, 246111.5408);
-		Point direction = new Point("57", 659430.3941, 246392.9943);
-		PillarCoords pillarCoords = new PillarCoords(center, direction);
+		
+		Point center = new Point("1", 100, 100);
+		Point direction = new Point("2", 200, 100);
+		PillarCoordsForWeightBase pillarCoords = new PillarCoordsForWeightBase(center, direction);
 		pillarCoords.setDistanceOnTheAxis(10);
-		pillarCoords.setHorizontalDistanceBetweenPillarLegs(7);
-		pillarCoords.setVerticalDistanceBetweenPillarLegs(7);
-		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(4);
-		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(4);
+		pillarCoords.setHorizontalDistanceBetweenPillarLegs(5);
+		pillarCoords.setVerticalDistanceBetweenPillarLegs(5);
+		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(1);
+		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(1);
+		pillarCoords.setRotation(60);
 		pillarCoords.calculatePillarPoints();
-		FileProcess file = new FileProcess("Csomor_58_oszlop_kit");
+		FileProcess file = new FileProcess("RotateTest");
 		file.saveDataForKML(pillarCoords.getPillarPoints().get(0));
 		file.saveDataForRTK(pillarCoords.getPillarPoints());
 		file.saveDataForTPS(pillarCoords.getPillarPoints());

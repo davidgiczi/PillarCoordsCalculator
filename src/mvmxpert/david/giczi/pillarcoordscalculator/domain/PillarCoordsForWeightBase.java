@@ -1,10 +1,11 @@
 package mvmxpert.david.giczi.pillarcoordscalculator.domain;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.management.InvalidAttributeValueException;
 
-public class PillarCoords {
+public class PillarCoordsForWeightBase {
 
 	private Point pillarCenterPoint;
 	private Point axisDirectionPoint;
@@ -13,11 +14,11 @@ public class PillarCoords {
 	private double horizontalSizeOfHoleOfPillarLeg;
 	private double verticalSizeOfHoleOfPillarLeg; 
 	private double distanceOnTheAxis;
-	private int rotation = 0;
+	private double rotation = 0;
 	private List<Point> pillarPoints;
 	private double azimuth;
 	
-	public PillarCoords(Point pillarCenterPoint, Point axisDirectonPoint) throws InvalidAttributeValueException {
+	public PillarCoordsForWeightBase(Point pillarCenterPoint, Point axisDirectonPoint) throws InvalidAttributeValueException {
 		this.pillarCenterPoint = pillarCenterPoint;
 		this.axisDirectionPoint = axisDirectonPoint;
 		AzimuthAndDistance azimuthAndDistance = new AzimuthAndDistance(pillarCenterPoint, axisDirectionPoint);
@@ -70,12 +71,15 @@ public class PillarCoords {
 	public void setDistanceOnTheAxis(double distanceOnTheAxis) {
 		this.distanceOnTheAxis = distanceOnTheAxis;
 	}
-	public int getRotation() {
+	
+	public double getRotation() {
 		return rotation;
 	}
-	public void setRotation(int rotation) {
+
+	public void setRotation(double rotation) {
 		this.rotation = rotation;
 	}
+
 	public List<Point> getPillarPoints() {
 		return pillarPoints;
 	}
@@ -200,9 +204,25 @@ public class PillarCoords {
 	}
 	
 	private void rotatePillarCoords() {
-		if( rotation == 0) {
+		if(rotation == 0) {
 			return;
 		}
+		double radRotation = Math.toRadians(rotation);
+		for (int i = 1; i < pillarPoints.size(); i++) {
+			
+			double rotated_x = (pillarPoints.get(i).getX_coord() - pillarPoints.get(0).getX_coord()) * Math.cos(radRotation) - 
+						(pillarPoints.get(i).getY_coord() - pillarPoints.get(0).getY_coord()) * Math.sin(radRotation);
+			double rotated_y = (pillarPoints.get(i).getX_coord() - pillarPoints.get(0).getX_coord()) * Math.sin(radRotation) +
+						(pillarPoints.get(i).getY_coord() - pillarPoints.get(0).getY_coord()) * Math.cos(radRotation);
+			DecimalFormat formatter = new DecimalFormat("###.###");
+			pillarPoints.get(i)
+			.setX_coord(pillarPoints.get(0).getX_coord() + 
+					Double.parseDouble(formatter.format(rotated_x).replace(',', '.')));
+			pillarPoints.get(i)
+			.setY_coord(pillarPoints.get(0).getY_coord() + 
+					Double.parseDouble(formatter.format(rotated_y).replace(',', '.')));		
 	}
+}
+	
 	
 }

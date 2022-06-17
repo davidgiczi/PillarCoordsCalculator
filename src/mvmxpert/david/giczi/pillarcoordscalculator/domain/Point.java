@@ -28,6 +28,15 @@ public class Point {
 	public double getY_coord() {
 		return y_coord;
 	}
+	
+	public void setX_coord(double x_coord) {
+		this.x_coord = x_coord;
+	}
+
+
+	public void setY_coord(double y_coord) {
+		this.y_coord = y_coord;
+	}
 
 
 	public String writePointForRTK() {
