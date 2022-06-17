@@ -18,7 +18,7 @@ public class PillarCoordsForWeightBase {
 	private double angleValueBetweenMainPath = 0;
 	private double angularMinuteValueBetweenMainPath = 0;
 	private double angularSecondValueBetweenMainPath = 0;
-	private double radRotation;
+	private double radRotation = 0;
 	private List<Point> pillarPoints;
 	private double azimuth;
 	
