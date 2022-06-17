@@ -15,6 +15,10 @@ public class PillarCoordsForWeightBase {
 	private double verticalSizeOfHoleOfPillarLeg; 
 	private double distanceOnTheAxis;
 	private double rotation = 0;
+	private double angleValueBetweenMainPath = 0;
+	private double angularMinuteValueBetweenMainPath = 0;
+	private double angularSecondValueBetweenMainPath = 0;
+	private double radRotation;
 	private List<Point> pillarPoints;
 	private double azimuth;
 	
@@ -84,6 +88,30 @@ public class PillarCoordsForWeightBase {
 		return pillarPoints;
 	}
 	
+	public double getAngleValueBetweenMainPath() {
+		return angleValueBetweenMainPath;
+	}
+
+	public void setAngleValueBetweenMainPath(double angleValueBetweenMainPath) {
+		this.angleValueBetweenMainPath = angleValueBetweenMainPath;
+	}
+
+	public double getAngularMinuteValueBetweenMainPath() {
+		return angularMinuteValueBetweenMainPath;
+	}
+
+	public void setAngularMinuteValueBetweenMainPath(double angularMinuteValueBetweenMainPath) {
+		this.angularMinuteValueBetweenMainPath = angularMinuteValueBetweenMainPath;
+	}
+
+	public double getAngularSecondValueBetweenMainPath() {
+		return angularSecondValueBetweenMainPath;
+	}
+
+	public void setAngularSecondValueBetweenMainPath(double angularSecondValueBetweenMainPath) {
+		this.angularSecondValueBetweenMainPath = angularSecondValueBetweenMainPath;
+	}
+
 	public void calculatePillarPoints() {
 		this.pillarPoints = new ArrayList<>();
 		pillarPoints.add(pillarCenterPoint);
@@ -92,6 +120,7 @@ public class PillarCoordsForWeightBase {
 		calculatePointsOfLeftAndDownHole();
 		calculatePointsOfRightAndDownHole();
 		calculatePointsOfRightAndUpHole();
+		calcRadRotation();
 		rotatePillarCoords();
 	}
 	
@@ -203,11 +232,26 @@ public class PillarCoordsForWeightBase {
 		pillarPoints.add(point24.calcPolarPoint());
 	}
 	
+	private void calcRadRotation() {
+		
+		if( rotation != 0) {
+			radRotation = Math.toRadians(rotation);
+			}
+		else if(angleValueBetweenMainPath != 0 || 
+					angularMinuteValueBetweenMainPath != 0 || 
+							angularSecondValueBetweenMainPath != 0) {
+				
+			radRotation = Math.toRadians(180 - (angleValueBetweenMainPath + 
+								angularMinuteValueBetweenMainPath / 60 + 
+								angularSecondValueBetweenMainPath / 3600) / 2);
+		}
+	}
+	
 	private void rotatePillarCoords() {
-		if(rotation == 0) {
+		if(radRotation == 0 ) {
 			return;
 		}
-		double radRotation = Math.toRadians(rotation);
+		
 		for (int i = 1; i < pillarPoints.size(); i++) {
 			
 			double rotated_x = (pillarPoints.get(i).getX_coord() - pillarPoints.get(0).getX_coord()) * Math.cos(radRotation) - 

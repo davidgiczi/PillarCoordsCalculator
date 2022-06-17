@@ -18,7 +18,8 @@ public class PillarCoordsCalculator {
 		pillarCoords.setVerticalDistanceBetweenPillarLegs(5);
 		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(1);
 		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(1);
-		pillarCoords.setRotation(60);
+		//pillarCoords.setRotation(30);
+		pillarCoords.setAngleValueBetweenMainPath(120);
 		pillarCoords.calculatePillarPoints();
 		FileProcess file = new FileProcess("RotateTest");
 		file.saveDataForKML(pillarCoords.getPillarPoints().get(0));
