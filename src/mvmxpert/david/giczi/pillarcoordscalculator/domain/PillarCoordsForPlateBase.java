@@ -189,9 +189,9 @@ public class PillarCoordsForPlateBase {
 					angularMinuteValueBetweenMainPath != 0 || 
 							angularSecondValueBetweenMainPath != 0) {
 				
-			radRotation = Math.toRadians(180 - (angleValueBetweenMainPath + 
+			radRotation = Math.toRadians((180 - (angleValueBetweenMainPath + 
 								angularMinuteValueBetweenMainPath / 60 + 
-								angularSecondValueBetweenMainPath / 3600) / 2);
+								angularSecondValueBetweenMainPath / 3600)) / 2);
 			return;
 		}
 		 
@@ -201,7 +201,6 @@ public class PillarCoordsForPlateBase {
 	private void rotatePillarCoords() {
 		
 		for (int i = 1; i < pillarPoints.size(); i++) {
-			
 			double rotated_x = (pillarPoints.get(i).getX_coord() - pillarPoints.get(0).getX_coord()) * Math.cos(radRotation) - 
 						(pillarPoints.get(i).getY_coord() - pillarPoints.get(0).getY_coord()) * Math.sin(radRotation);
 			double rotated_y = (pillarPoints.get(i).getX_coord() - pillarPoints.get(0).getX_coord()) * Math.sin(radRotation) +
