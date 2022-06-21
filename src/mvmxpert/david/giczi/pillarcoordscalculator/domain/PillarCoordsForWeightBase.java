@@ -247,9 +247,6 @@ public class PillarCoordsForWeightBase {
 	}
 	
 	private void rotatePillarCoords() {
-		if(radRotation == 0 ) {
-			return;
-		}
 		
 		for (int i = 1; i < pillarPoints.size(); i++) {
 			

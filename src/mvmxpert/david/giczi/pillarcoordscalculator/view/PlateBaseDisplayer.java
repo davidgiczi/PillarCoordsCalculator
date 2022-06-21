@@ -13,7 +13,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
-
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.AzimuthAndDistance;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.PolarPoint;
@@ -59,7 +58,7 @@ public class PlateBaseDisplayer extends JFrame{
 		double Y = pillarBasePoints.get(0).getY_coord();
 		for (Point pillarBasePoint : pillarBasePoints) {
 			Point point = new Point(pillarBasePoint.getPointID(), 
-			displayerCenterX + Math.round((pillarBasePoint.getX_coord() - X) * 1000.0) / (2* 22.5),
+			displayerCenterX + Math.round((pillarBasePoint.getX_coord() - X) * 1000.0) / (2 * 22.5),
 			displayerCenterY -	Math.round((pillarBasePoint.getY_coord() - Y) * 1000.0) / (2 * 22.5));
 			transformedPillarBasePoints.add(point);
 		}
