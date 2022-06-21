@@ -233,17 +233,17 @@ public class PillarCoordsForWeightBase {
 	
 	private void calcRadRotation() {
 		
-		if( rotation != 0) {
-			radRotation = Math.toRadians(rotation);
-			}
-		else if(angleValueBetweenMainPath != 0 || 
+		 if(angleValueBetweenMainPath != 0 || 
 					angularMinuteValueBetweenMainPath != 0 || 
 							angularSecondValueBetweenMainPath != 0) {
 				
-			radRotation = Math.toRadians(180 - (angleValueBetweenMainPath + 
+			radRotation = Math.toRadians((180 - (angleValueBetweenMainPath + 
 								angularMinuteValueBetweenMainPath / 60 + 
-								angularSecondValueBetweenMainPath / 3600) / 2);
+								angularSecondValueBetweenMainPath / 3600)) / 2);
+			return;
 		}
+		 
+		 radRotation = Math.toRadians(rotation);
 	}
 	
 	private void rotatePillarCoords() {

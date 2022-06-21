@@ -59,8 +59,8 @@ public class PlateBaseDisplayer extends JFrame{
 		double Y = pillarBasePoints.get(0).getY_coord();
 		for (Point pillarBasePoint : pillarBasePoints) {
 			Point point = new Point(pillarBasePoint.getPointID(), 
-			displayerCenterX + Math.round((pillarBasePoint.getX_coord() - X) * 1000.0) / 22.5,
-			displayerCenterY -	Math.round((pillarBasePoint.getY_coord() - Y) * 1000.0) / 22.5);
+			displayerCenterX + Math.round((pillarBasePoint.getX_coord() - X) * 1000.0) / (2* 22.5),
+			displayerCenterY -	Math.round((pillarBasePoint.getY_coord() - Y) * 1000.0) / (2 * 22.5));
 			transformedPillarBasePoints.add(point);
 		}
 	}
@@ -136,11 +136,11 @@ public class PlateBaseDisplayer extends JFrame{
         				transformedPillarBasePoints.get(6).getY_coord()));
 	      //Scale
 	        g2d.draw(new Line2D.Double(displayerCenterX + 300.0, displayerCenterY + 300.0,
-	        						   displayerCenterX + 345.0, displayerCenterY + 300.0));
+	        						   displayerCenterX + 322.5, displayerCenterY + 300.0));
 	        g2d.draw(new Line2D.Double(displayerCenterX + 300.0, displayerCenterY + 295.5,
 					   displayerCenterX + 300.0, displayerCenterY + 304.5));
-	        g2d.draw(new Line2D.Double(displayerCenterX + 345.0, displayerCenterY + 295.5,
-					   displayerCenterX + 345.0, displayerCenterY + 304.5));
+	        g2d.draw(new Line2D.Double(displayerCenterX + 322.5, displayerCenterY + 295.5,
+					   displayerCenterX + 322.5, displayerCenterY + 304.5));
 	    }
 	 
 	 	private void writeText(Graphics g) {
@@ -160,31 +160,35 @@ public class PlateBaseDisplayer extends JFrame{
 	 		g2d.setColor(Color.BLACK);
 	 		g2d.drawString(directionPointId, (float) transformedPillarBasePoints.get(6).getX_coord(), 
 	 				(float) transformedPillarBasePoints.get(6).getY_coord() - 40);
-	 		g2d.drawString("1m", (float) displayerCenterX + 310, (float) displayerCenterY + 295);
-	 		g2d.drawString("M= 1:100", (float) displayerCenterX + 300, (float) displayerCenterY + 350);
+	 		g2d.drawString("1m", (float) displayerCenterX + 300, (float) displayerCenterY + 290);
+	 		g2d.drawString("M= 1:200", (float) displayerCenterX + 300, (float) displayerCenterY + 350);
 	 		
 	 		AzimuthAndDistance base14 = new AzimuthAndDistance(pillarBasePoints.get(1), pillarBasePoints.get(4));
-	 		AzimuthAndDistance tr14 = new AzimuthAndDistance(transformedPillarBasePoints.get(4), transformedPillarBasePoints.get(1));
-	        PolarPoint polarPoint14 = new PolarPoint(transformedPillarBasePoints.get(4), tr14.calcDistanceBetweenTheTwoPoints() / 2,
-	        		tr14.calcAzimuthFromPointAToPointB(), null);
-	        DecimalFormat df = new DecimalFormat("###.###");
+	 		AzimuthAndDistance tr14 = new AzimuthAndDistance(transformedPillarBasePoints.get(1), transformedPillarBasePoints.get(4));
+	 		AzimuthAndDistance tr34 = new AzimuthAndDistance(transformedPillarBasePoints.get(3), transformedPillarBasePoints.get(4));
+	 		DecimalFormat df = new DecimalFormat("###.###");
 	        g2d.rotate(base14.calcAzimuthFromPointAToPointB() + Math.PI / 2,
-	        		(float) polarPoint14.calcPolarPoint().getX_coord() + 10,
-	        		(float) polarPoint14.calcPolarPoint().getY_coord() + 10);
+	        		(float) transformedPillarBasePoints.get(0).getX_coord(),
+	        		(float) transformedPillarBasePoints.get(0).getY_coord());
 	 		g2d.drawString(df.format(base14.calcDistanceBetweenTheTwoPoints()) + "m",
-	 				(float) polarPoint14.calcPolarPoint().getX_coord() + 10,
-	 				(float) polarPoint14.calcPolarPoint().getY_coord() + 10);
+	 				(float) transformedPillarBasePoints.get(0).getX_coord() + 10,
+	 				(float) (transformedPillarBasePoints.get(0).getY_coord() - (tr34.calcDistanceBetweenTheTwoPoints() + 10) / 2));
+	 		AzimuthAndDistance base68 = new AzimuthAndDistance(pillarBasePoints.get(6), pillarBasePoints.get(8));
+	 		g2d.drawString(df.format((base68.calcDistanceBetweenTheTwoPoints() - base14.calcDistanceBetweenTheTwoPoints()) / 2) + "m",
+	 				(float) (transformedPillarBasePoints.get(0).getX_coord() - (tr14.calcDistanceBetweenTheTwoPoints() + 100) / 2),
+	 				(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
 	 		
 	 		AzimuthAndDistance base34 = new AzimuthAndDistance(pillarBasePoints.get(3), pillarBasePoints.get(4));
-	 		AzimuthAndDistance tr34 = new AzimuthAndDistance(transformedPillarBasePoints.get(3), transformedPillarBasePoints.get(4));
-	 		 PolarPoint polarPoint34 = new PolarPoint(transformedPillarBasePoints.get(3), tr34.calcDistanceBetweenTheTwoPoints() / 2,
-		        		tr34.calcAzimuthFromPointAToPointB(), null);
 	 		g2d.rotate(- Math.PI / 2,
-	        		(float) polarPoint34.calcPolarPoint().getX_coord(),
-	        		(float) polarPoint34.calcPolarPoint().getY_coord());
+	        		(float) transformedPillarBasePoints.get(0).getX_coord(),
+	        		(float) transformedPillarBasePoints.get(0).getY_coord());
 	 		g2d.drawString(df.format(base34.calcDistanceBetweenTheTwoPoints()) + "m",
-	 				(float) polarPoint34.calcPolarPoint().getX_coord(),
-	 				(float) polarPoint34.calcPolarPoint().getY_coord());
+	 				(float) transformedPillarBasePoints.get(0).getX_coord() + 10,
+	 				(float) (transformedPillarBasePoints.get(0).getY_coord() + (tr14.calcDistanceBetweenTheTwoPoints() - 10) / 2));
+	 		AzimuthAndDistance base57 = new AzimuthAndDistance(pillarBasePoints.get(5), pillarBasePoints.get(7));
+	 		g2d.drawString(df.format((base57.calcDistanceBetweenTheTwoPoints() - base34.calcDistanceBetweenTheTwoPoints()) / 2) + "m",
+	 				(float) (transformedPillarBasePoints.get(0).getX_coord() - (tr34.calcDistanceBetweenTheTwoPoints() + 100) / 2),
+	 				(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
 	 	}
 	 	
 	 	@Override

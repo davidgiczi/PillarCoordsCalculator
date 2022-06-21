@@ -27,12 +27,10 @@ public class PillarCoordsCalculator {
 		Point center = new Point("T2",730977.3214, 107203.9048);
 		Point direction = new Point("T3", 730998.3140, 107025.1332);
 		PillarCoordsForPlateBase pillarCoords = new PillarCoordsForPlateBase(center, direction);
-		pillarCoords.setHorizontalSizeOfHole(9.5);
-		pillarCoords.setVerticalSizeOfHole(9.5);
-		pillarCoords.setHorizontalDistanceFromTheSideOfHole(3);
-		pillarCoords.setVerticalDistanceFromTheSideOfHole(3);
-		pillarCoords.setAngleValueBetweenMainPath(160);
-		pillarCoords.setAngularMinuteValueBetweenMainPath(11);
+		pillarCoords.setHorizontalSizeOfHole(20.5);
+		pillarCoords.setVerticalSizeOfHole(20.5);
+		pillarCoords.setHorizontalDistanceFromTheSideOfHole(10);
+		pillarCoords.setVerticalDistanceFromTheSideOfHole(10);
 		pillarCoords.calculatePillarPoints();
 		PlateBaseDisplayer plateBase = new PlateBaseDisplayer(pillarCoords.getPillarPoints(), "Feto T2 Pillar");
 		plateBase.setDirectionPointId(direction.getPointID());
