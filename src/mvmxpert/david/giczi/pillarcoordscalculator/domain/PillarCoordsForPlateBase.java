@@ -134,6 +134,11 @@ public class PillarCoordsForPlateBase {
 	public List<Point> getPillarPoints() {
 		return pillarPoints;
 	}
+	
+
+	public double getRadRotation() {
+		return radRotation;
+	}
 
 
 	public void calculatePillarPoints() {

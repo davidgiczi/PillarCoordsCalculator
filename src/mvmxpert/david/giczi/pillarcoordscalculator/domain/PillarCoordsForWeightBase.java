@@ -110,6 +110,10 @@ public class PillarCoordsForWeightBase {
 	public void setAngularSecondValueBetweenMainPath(double angularSecondValueBetweenMainPath) {
 		this.angularSecondValueBetweenMainPath = angularSecondValueBetweenMainPath;
 	}
+	
+	public double getRadRotation() {
+		return radRotation;
+	}
 
 	public void calculatePillarPoints() {
 		this.pillarPoints = new ArrayList<>();
