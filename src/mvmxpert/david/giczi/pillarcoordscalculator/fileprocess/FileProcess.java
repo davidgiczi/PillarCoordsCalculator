@@ -13,13 +13,14 @@ import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 public class FileProcess {
 	
 	private static String projectName;
-	private static String FILE_PATH = "C:/Users/User/Documents/docs/MVMXPert/_FOR_PILLAR";
+	public static String FILE_PATH = "C:/Users/User/Documents/docs/MVMXPert/_FOR_PILLAR";
 	
 	
 	public FileProcess(String projectName) {
 		FileProcess.projectName= projectName;
 	}
-
+	
+	
 	public void saveDataForKML(Point pillarCenter) {
 		
 		File file = new File(FILE_PATH + "/" + projectName + "_KML.txt");
@@ -107,10 +108,10 @@ public class FileProcess {
 		
 	}
 	
-	public static List<String> getSteakoutPointsData(String path){
+	public static List<String> getSteakoutPointsData(){
 		
 		List<String> pointData = new ArrayList<>();
-		File file = new File(path);
+		File file = new File(FILE_PATH);
 		
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			

@@ -242,7 +242,7 @@ public class WeightBaseDisplayer extends JFrame {
 					(float) transformedPillarBasePoints.get(i).getX_coord() + 20,
 					(float) transformedPillarBasePoints.get(i).getY_coord() - 20);
 			g2d.setColor(Color.RED);
-			g2d.drawString(String.valueOf(pillarBasePoints.get(0).getX_coord()),
+			g2d.drawString(String.valueOf(pillarBasePoints.get(i).getX_coord()),
 					(float) transformedPillarBasePoints.get(i).getX_coord() + 20,
 					(float) transformedPillarBasePoints.get(i).getY_coord() - 5);
 			g2d.drawString(String.valueOf(pillarBasePoints.get(i).getY_coord()),

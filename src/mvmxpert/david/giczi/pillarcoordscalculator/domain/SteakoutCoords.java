@@ -1,6 +1,6 @@
 package mvmxpert.david.giczi.pillarcoordscalculator.domain;
 
-public class SteakoutCoord {
+public class SteakoutCoords {
 
 	
 	private String pointID;
@@ -10,7 +10,7 @@ public class SteakoutCoord {
 	private double YcoordForSteakoutPoint;
 	
 
-	public SteakoutCoord(String pointID, double xcoordForDesignPoint, double ycoordForDesignPoint,
+	public SteakoutCoords(String pointID, double xcoordForDesignPoint, double ycoordForDesignPoint,
 			double xcoordForSteakoutPoint, double ycoordForSteakoutPoint) {
 		this.pointID = pointID;
 		XcoordForDesignPoint = xcoordForDesignPoint;
