@@ -29,19 +29,25 @@ public class PillarCoordsCalculator {
 //								"Csömör 58. oszlop");
 		
 		 
-		Point center = new Point("T2",730977.3214, 107203.9048);
-		Point direction = new Point("T3", 730998.3140, 107025.1332);
+		Point center = new Point("T11", 731288.2036, 105251.3606);
+		Point direction = new Point("T12", 731077.8079, 105128.6198);
 		PillarCoordsForPlateBase pillarCoords = new PillarCoordsForPlateBase(center, direction);
-		pillarCoords.setHorizontalSizeOfHole(18);
-		pillarCoords.setVerticalSizeOfHole(18);
-		pillarCoords.setHorizontalDistanceFromTheSideOfHole(7);
-		pillarCoords.setVerticalDistanceFromTheSideOfHole(7);
-		pillarCoords.setAngleValueBetweenMainPath(160);
+		pillarCoords.setHorizontalSizeOfHole(8.6);
+		pillarCoords.setVerticalSizeOfHole(8.6);
+		pillarCoords.setHorizontalDistanceFromTheSideOfHole(6);
+		pillarCoords.setVerticalDistanceFromTheSideOfHole(6);
+		//pillarCoords.setAngleValueBetweenMainPath(270);
 		pillarCoords.calculatePillarPoints();
 		new PlateBaseDisplayer(pillarCoords.getPillarPoints(), 
 									   pillarCoords.getAxisDirectionPoint(),
 									   pillarCoords.getRadRotation(),
-									   "Feto T2 Pillar");
+									   "FETO T6-T12 Pillars");
+//		fileprocess file = new fileprocess("feto t6-t12 oszlopok");
+//		file.savedataforkml(pillarcoords.getpillarcenterpoint());
+//		file.savedataforms(pillarcoords.getpillarpoints());
+//		file.savedataforrtk(pillarcoords.getpillarpoints());
+//		file.savedatafortps(pillarcoords.getpillarpoints());
+		
 
 	}
 	

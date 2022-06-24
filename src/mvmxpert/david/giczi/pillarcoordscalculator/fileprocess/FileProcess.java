@@ -1,22 +1,25 @@
 package mvmxpert.david.giczi.pillarcoordscalculator.fileprocess;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 
 public class FileProcess {
 	
-	private String projectName;
-	
-	public FileProcess(String projectName) {
-		this.projectName = projectName;
-	}
-
+	private static String projectName;
 	private static String FILE_PATH = "C:/Users/User/Documents/docs/MVMXPert/_FOR_PILLAR";
 	
+	
+	public FileProcess(String projectName) {
+		FileProcess.projectName= projectName;
+	}
+
 	public void saveDataForKML(Point pillarCenter) {
 		
 		File file = new File(FILE_PATH + "/" + projectName + "_KML.txt");
@@ -86,4 +89,39 @@ public class FileProcess {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void saveSteakoutPoint(String pointData) {
+		
+		File file = new File(FILE_PATH + "/" + projectName + "_kit.txt");
+		
+		try(BufferedWriter writer = new BufferedWriter(
+				new FileWriter(file, true))) {
+			
+				writer.write(pointData);
+				writer.newLine();
+					
+		} catch (IOException e) {
+			System.out.println( "\'"+ file.getName() + "\' file cannot be created.");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static List<String> getSteakoutPointsData(String path){
+		
+		List<String> pointData = new ArrayList<>();
+		File file = new File(path);
+		
+		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+			
+			pointData.add(reader.readLine());
+			
+		} catch (IOException e) {
+			System.out.println( "\'"+ file.getName() + "\' file not found.");
+			e.printStackTrace();
+		}
+		
+		return pointData;
+	}
+	
 }
