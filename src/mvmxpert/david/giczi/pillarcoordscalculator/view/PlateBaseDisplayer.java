@@ -167,34 +167,45 @@ public class PlateBaseDisplayer extends JFrame{
 					   displayerCenterX + 322.5, displayerCenterY + 304.5));
 	    }
 	 
-	 	private void writeText(Graphics g) {
-	 		Graphics2D g2d = (Graphics2D) g;
-	 		
+		private void writeCoords(Graphics g) {
+			float X = 100f;
+			float Y = 100f;
+			Graphics2D g2d = (Graphics2D) g;
 	 		g2d.setFont(new Font("Arial",Font.BOLD, 16));
 	 		for (int i = 0; i < pillarBasePoints.size(); i++) {
 	 			g2d.setColor(Color.BLACK);
+	 			g2d.drawString(pillarBasePoints.get(i).getPointID(), X, Y);
+	 			X += 80f;
+	 			g2d.setColor(Color.RED);
+	 			g2d.drawString(String.valueOf(pillarBasePoints.get(i).getX_coord()), X, Y);
+	 			X += 110f;
+				g2d.drawString(String.valueOf(pillarBasePoints.get(i).getY_coord()), X, Y);
+				X = 100f;
+				Y += 30f;
+			}
+			
+		}
+		
+	 	private void writeText(Graphics g) {
+	 		Graphics2D g2d = (Graphics2D) g;
+	 		g2d.setColor(Color.BLACK);
+	 		 
+	 		for (int i = 0; i < pillarBasePoints.size(); i++) {
 	 			g2d.drawString(pillarBasePoints.get(i).getPointID(),
 						(float)	transformedPillarBasePoints.get(i).getX_coord() + 15, (float) transformedPillarBasePoints.get(i).getY_coord() + 20);
-	 			g2d.setColor(Color.RED);
-				g2d.drawString(String.valueOf(pillarBasePoints.get(i).getX_coord()),
-					(float)	transformedPillarBasePoints.get(i).getX_coord() + 15, (float) transformedPillarBasePoints.get(i).getY_coord() + 40);
-				g2d.drawString(String.valueOf(pillarBasePoints.get(i).getY_coord()),
-						(float)	transformedPillarBasePoints.get(i).getX_coord() + 15, (float) transformedPillarBasePoints.get(i).getY_coord() + 60);
-			}
-	 		
+	 		}
 	 		g2d.setColor(Color.MAGENTA);
+	 		AzimuthAndDistance azimuthAndDistance = new AzimuthAndDistance(transformedPillarBasePoints.get(0), directionDisplayerPoint);
+	 		PolarPoint polarPoint = 
+	  	        		new PolarPoint(transformedPillarBasePoints.get(0), 300, 
+	  	        				azimuthAndDistance.calcAzimuthFromPointAToPointB(), "baseLine");
 	 		if( rotation == 0) {
-	 		g2d.drawString(directionDisplayerPoint.getPointID(), (float) transformedPillarBasePoints.get(6).getX_coord() + 10, 
-	 				(float) transformedPillarBasePoints.get(6).getY_coord() + 130);
+	 		g2d.drawString(directionDisplayerPoint.getPointID(), (float) polarPoint.calcPolarPoint().getX_coord() - 80, 
+	 				(float) polarPoint.calcPolarPoint().getY_coord() + 50);
 	 		}
 	 		else {
-
-	 			AzimuthAndDistance azimuthAndDistance = new AzimuthAndDistance(transformedPillarBasePoints.get(0), directionDisplayerPoint);
-	 	  	    PolarPoint polarPoint = 
-	 	  	        		new PolarPoint(transformedPillarBasePoints.get(0), 300, 
-	 	  	        				azimuthAndDistance.calcAzimuthFromPointAToPointB(), "baseLine");
-	 	  	 g2d.drawString(directionDisplayerPoint.getPointID(), (float) polarPoint.calcPolarPoint().getX_coord() - 10, 
-		 				(float) polarPoint.calcPolarPoint().getY_coord() + 40);
+	 	  	 g2d.drawString(directionDisplayerPoint.getPointID(), (float) polarPoint.calcPolarPoint().getX_coord() - 80, 
+		 				(float) polarPoint.calcPolarPoint().getY_coord() + 50);
 	 		}
 	 		
 	 		g2d.setColor(Color.BLACK);
@@ -233,6 +244,7 @@ public class PlateBaseDisplayer extends JFrame{
 	    public void paint(Graphics g) {
 	        super.paint(g);
 	        drawPlateBase(g);
+	        writeCoords(g);
 	        writeText(g);
 	    }
 	

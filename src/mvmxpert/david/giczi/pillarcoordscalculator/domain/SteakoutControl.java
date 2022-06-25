@@ -7,13 +7,11 @@ import mvmxpert.david.giczi.pillarcoordscalculator.enums.PointID;
 
 public class SteakoutControl {
 
-	private List<mvmxpert.david.giczi.pillarcoordscalculator.domain.Point> designedPillarCoords;
+	private List<Point> designedPillarCoords;
 	private Enum<PointID> pointID;
 	private String pointIDValue;
 	private String delimiter;
 	private List<SteakoutCoords> controlledCoords;
-	private int NUMBER_OF_STEAKOUTED_POINTS_FOR_WEIGHT_BASE = 25;
-	private int NUMBER_OF_STEAKOUTED_POINTS_FOR_PLATE_BASE = 9;
 	
 	public SteakoutControl(List<Point>
 	designedPillarCoords, PointID pointID, String pointIDValue, String delimiter) {
@@ -23,47 +21,21 @@ public class SteakoutControl {
 		this.delimiter = delimiter;
 	}
 	
-	public void controlSteakoutForWeightBase() {
+	public void controlSteakout() {
 		controlledCoords = new ArrayList<>();
-		for(int i = 0; i < NUMBER_OF_STEAKOUTED_POINTS_FOR_WEIGHT_BASE; i++) {
-			controlledCoords.add(null);
-		}
 		List<String> steakoutedPointData = FileProcess.getSteakoutedPointData();
 		for (String controlData : steakoutedPointData) { 
 			String[] data = controlData.split(delimiter);
-			for(int i = 0; i < designedPillarCoords.size(); i++) {
-				if(getPointIdentifier(designedPillarCoords.get(i).getPointID()).equals(data[0])) {
+			for(Point designedCoords : designedPillarCoords) {
+				if(getPointIdentifier(designedCoords.getPointID()).equals(data[0])) {
 					SteakoutCoords controlPoint = 
-							new SteakoutCoords(designedPillarCoords.get(i).getPointID(), 
-									designedPillarCoords.get(i).getX_coord(),
-									designedPillarCoords.get(i).getY_coord(), 
+							new SteakoutCoords(designedCoords.getPointID(), 
+									designedCoords.getX_coord(),
+									designedCoords.getY_coord(), 
 									Double.parseDouble(data[1]),
 									Double.parseDouble(data[2]));
 					FileProcess.saveSteakoutPoint(controlPoint.getSteakoutedPointData());
-					controlledCoords.set(i, controlPoint);
-				}
-			}
-		}
-	}
-	
-	public void controlSteakoutForPlateBase() {
-		controlledCoords = new ArrayList<>();
-		for(int i = 0; i < NUMBER_OF_STEAKOUTED_POINTS_FOR_PLATE_BASE; i++) {
-			controlledCoords.add(null);
-		}
-		List<String> steakoutedPointData = FileProcess.getSteakoutedPointData();
-		for (String controlData : steakoutedPointData) { 
-			String[] data = controlData.split(delimiter);
-			for(int i = 0; i < designedPillarCoords.size(); i++) {
-				if(getPointIdentifier(designedPillarCoords.get(i).getPointID()).equals(data[0])) {
-					SteakoutCoords controlPoint = 
-							new SteakoutCoords(designedPillarCoords.get(i).getPointID(), 
-									designedPillarCoords.get(i).getX_coord(),
-									designedPillarCoords.get(i).getY_coord(), 
-									Double.parseDouble(data[1]),
-									Double.parseDouble(data[2]));
-					FileProcess.saveSteakoutPoint(controlPoint.getSteakoutedPointData());
-					controlledCoords.set(i, controlPoint);
+					controlledCoords.add(controlPoint);
 				}
 			}
 		}

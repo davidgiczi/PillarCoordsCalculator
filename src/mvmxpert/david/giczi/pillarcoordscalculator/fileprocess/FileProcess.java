@@ -8,21 +8,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 
 public class FileProcess {
 	
-	private static String projectName;
-	public static String FILE_PATH = "C:/Users/User/Documents/docs/MVMXPert/_FOR_PILLAR";
+	public static String projectName;
+	private static String FILE_PATH;
+	private static String FILE_NAME;
 	
-	
-	public FileProcess(String projectName) {
-		FileProcess.projectName= projectName;
-	}
-	
-	
-	public void saveDataForKML(Point pillarCenter) {
 		
+	public static void saveDataForKML(Point pillarCenter) {
+		
+		if(FILE_PATH == null) {
+			return;
+		}
+
 		File file = new File(FILE_PATH + "/" + projectName + "_KML.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
@@ -37,7 +40,11 @@ public class FileProcess {
 		}
 	}
 	
-	public void saveDataForRTK(List<Point> points) {
+	public static void saveDataForRTK(List<Point> points) {
+		
+		if(FILE_PATH == null) {
+			return;
+		}
 		
 		File file = new File(FILE_PATH + "/" + projectName + "_RTK.txt");
 		
@@ -55,7 +62,11 @@ public class FileProcess {
 		}
 	}
 	
-	public void saveDataForTPS(List<Point> points) {
+	public static void saveDataForTPS(List<Point> points) {
+		
+		if(FILE_PATH == null) {
+			return;
+		}
 		
 		File file = new File(FILE_PATH + "/" + projectName + "_TPS.txt");
 		
@@ -73,7 +84,11 @@ public class FileProcess {
 		}
 	}
 	
-	public void saveDataForMS(List<Point> points) {
+	public static void saveDataForMS(List<Point> points) {
+		
+		if(FILE_PATH == null) {
+			return;
+		}
 		
 		File file = new File(FILE_PATH + "/" + projectName + "_MS.txt");
 		
@@ -93,6 +108,10 @@ public class FileProcess {
 	
 	public static void saveSteakoutPoint(String pointData) {
 		
+		if(FILE_PATH == null) {
+			return;
+		}
+		
 		File file = new File(FILE_PATH + "/" + projectName + "_kit.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
@@ -111,12 +130,16 @@ public class FileProcess {
 	public static List<String> getSteakoutedPointData(){
 		
 		List<String> pointData = new ArrayList<>();
-		File file = new File(FILE_PATH + "/KALOCSA-PAKS_TPS_KIT_27_43_20220620.txt");
+		
+		if(FILE_PATH == null || FILE_NAME == null) {
+			return pointData;
+		}
+		File file = new File(FILE_PATH + "/" + FILE_NAME);
 		
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			
 			String row = reader.readLine();
-			while(row != null) {
+			while(row != null) { 
 			pointData.add(row);
 			row = reader.readLine();
 			}
@@ -129,4 +152,29 @@ public class FileProcess {
 		return pointData;
 	}
 	
+	public static void setFolder() {
+		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		jfc.setDialogTitle("Válassz mentési mappát.");
+		jfc.setAcceptAllFileFilterUsed(false);
+		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		int returnValue = jfc.showOpenDialog(null);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = jfc.getSelectedFile();
+			FILE_PATH = selectedFile.getParent();
+		}
+	}
+	
+	public static void setSteakoutFile() {
+			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+			jfc.setDialogTitle("Válassz kitûzési fájlt.");
+			jfc.setAcceptAllFileFilterUsed(false);
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("txt fájlok", "txt");
+			jfc.addChoosableFileFilter(filter);
+			int returnValue = jfc.showOpenDialog(null);
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				File selectedFile = jfc.getSelectedFile();
+				FILE_NAME = selectedFile.getName();
+		}
+	
+	}
 }
