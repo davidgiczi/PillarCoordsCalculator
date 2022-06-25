@@ -4,6 +4,8 @@ import javax.management.InvalidAttributeValueException;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.PillarCoordsForPlateBase;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.PillarCoordsForWeightBase;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
+import mvmxpert.david.giczi.pillarcoordscalculator.domain.SteakoutControl;
+import mvmxpert.david.giczi.pillarcoordscalculator.enums.PointID;
 import mvmxpert.david.giczi.pillarcoordscalculator.fileprocess.FileProcess;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.PlateBaseDisplayer;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.WeightBaseDisplayer;
@@ -13,20 +15,22 @@ public class PillarCoordsCalculator {
 	public static void main(String[] args) throws InvalidAttributeValueException {
 		
 		
-		Point center = new Point("58", 659249.8588, 246111.5408);
-		Point direction = new Point("57", 659430.3941, 246392.9943);
+		Point center = new Point("43", 636057.220, 132220.455);
+		Point direction = new Point("44", 636140.474, 131932.424);
 		PillarCoordsForWeightBase pillarCoords = new PillarCoordsForWeightBase(center, direction);
 		pillarCoords.setDistanceOnTheAxis(10);
-		pillarCoords.setHorizontalDistanceBetweenPillarLegs(7);
-		pillarCoords.setVerticalDistanceBetweenPillarLegs(7);
-		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(4);
-		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(4);
-		//pillarCoords.setAngleValueBetweenMainPath(160);
+		pillarCoords.setHorizontalDistanceBetweenPillarLegs(2.88);
+		pillarCoords.setVerticalDistanceBetweenPillarLegs(4.26);
+		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(2);
+		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(2);
 		pillarCoords.calculatePillarPoints();
 		new WeightBaseDisplayer(pillarCoords.getPillarPoints(),
 								pillarCoords.getAxisDirectionPoint(),
 								pillarCoords.getRadRotation(),
-								"Csömör 58. oszlop");
+								"Paks 43. oszlop");
+		SteakoutControl steakout = new SteakoutControl(pillarCoords.getPillarPoints(), PointID.PREFIX, "KIT-", ";");
+		new FileProcess("Paks_43_oszlop");
+		steakout.controlSteakoutForWeightBase();
 		
 		 
 //		Point center = new Point("T11", 731288.2036, 105251.3606);

@@ -108,14 +108,18 @@ public class FileProcess {
 		
 	}
 	
-	public static List<String> getSteakoutPointsData(){
+	public static List<String> getSteakoutedPointData(){
 		
 		List<String> pointData = new ArrayList<>();
-		File file = new File(FILE_PATH);
+		File file = new File(FILE_PATH + "/KALOCSA-PAKS_TPS_KIT_27_43_20220620.txt");
 		
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			
-			pointData.add(reader.readLine());
+			String row = reader.readLine();
+			while(row != null) {
+			pointData.add(row);
+			row = reader.readLine();
+			}
 			
 		} catch (IOException e) {
 			System.out.println( "\'"+ file.getName() + "\' file not found.");

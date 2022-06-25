@@ -19,13 +19,16 @@ public class SteakoutCoords {
 		YcoordForSteakoutPoint = ycoordForSteakoutPoint;
 	}
 
-	public String savePoint() {
+	public String getSteakoutedPointData() {
 		return pointID + 
-				" " + XcoordForDesignPoint + " " + YcoordForDesignPoint + 
-						 " " + XcoordForSteakoutPoint + " " + YcoordForSteakoutPoint +
-						 " " + (XcoordForDesignPoint - XcoordForSteakoutPoint) + 
-						 " " + (YcoordForDesignPoint - YcoordForSteakoutPoint);
+				" " + String.valueOf(XcoordForDesignPoint).replace('.', ',') + 
+				" " + String.valueOf(YcoordForDesignPoint).replace('.', ',') + 
+				" " + String.valueOf(XcoordForSteakoutPoint).replace('.', ',') +
+				" " + String.valueOf(YcoordForSteakoutPoint).replace('.', ',') +
+			    " " + String.valueOf(Math.round((XcoordForDesignPoint - XcoordForSteakoutPoint) * 1000.0) / 1000.0).replace('.', ',') + 
+				" " + String.valueOf(Math.round((YcoordForDesignPoint - YcoordForSteakoutPoint) * 1000.0) / 1000.0).replace('.', ',');
 	}
+	
 	
 }
  

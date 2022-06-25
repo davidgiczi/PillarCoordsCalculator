@@ -1,6 +1,6 @@
 package mvmxpert.david.giczi.pillarcoordscalculator.enums;
 
-public enum Point {
+public enum PointID {
 
 	
 	PREFIX,
