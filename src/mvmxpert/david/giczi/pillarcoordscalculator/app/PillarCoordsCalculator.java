@@ -5,7 +5,7 @@ import mvmxpert.david.giczi.pillarcoordscalculator.domain.PillarCoordsForPlateBa
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.PillarCoordsForWeightBase;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.SteakoutControl;
-import mvmxpert.david.giczi.pillarcoordscalculator.enums.PointID;
+import mvmxpert.david.giczi.pillarcoordscalculator.enumerator.PointID;
 import mvmxpert.david.giczi.pillarcoordscalculator.fileprocess.FileProcess;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.PlateBaseDisplayer;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.WeightBaseDisplayer;
@@ -14,23 +14,26 @@ public class PillarCoordsCalculator {
 
 	public static void main(String[] args) throws InvalidAttributeValueException {
 		
-		
+//		FileProcess.projectName = "Paks_43_oszlop";
+//		//FileProcess.setFolder();
 		Point center = new Point("43", 636057.220, 132220.455);
 		Point direction = new Point("44", 636140.474, 131932.424);
 		PillarCoordsForWeightBase pillarCoords = new PillarCoordsForWeightBase(center, direction);
-		pillarCoords.setDistanceOnTheAxis(10);
-		pillarCoords.setHorizontalDistanceBetweenPillarLegs(2.88);
-		pillarCoords.setVerticalDistanceBetweenPillarLegs(4.26);
+		pillarCoords.setDistanceOnTheAxis(15);
+		pillarCoords.setHorizontalDistanceBetweenPillarLegs(5.88);
+		pillarCoords.setVerticalDistanceBetweenPillarLegs(7.26);
 		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(2);
-		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(2);
+		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(3);
 		pillarCoords.setAngleValueBetweenMainPath(90);
 		pillarCoords.calculatePillarPoints();
 		new WeightBaseDisplayer(pillarCoords.getPillarPoints(),
 								pillarCoords.getAxisDirectionPoint(),
 								pillarCoords.getRadRotation(),
 								"Paks 43. oszlop");
+//		FileProcess.setSteakoutFile();
+//		SteakoutControl stk = new SteakoutControl(pillarCoords.getPillarPoints(), PointID.POSTFIX, "_STK", ";");
+//		stk.controlSteakout();
 		
-		 
 //		Point center = new Point("T12", 731077.8079, 105128.6198);
 //		Point direction = new Point("T11", 731288.2036, 105251.3606);
 //		PillarCoordsForPlateBase pillarCoords = new PillarCoordsForPlateBase(center, direction);

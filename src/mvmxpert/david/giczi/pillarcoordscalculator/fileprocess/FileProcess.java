@@ -160,7 +160,7 @@ public class FileProcess {
 		int returnValue = jfc.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = jfc.getSelectedFile();
-			FILE_PATH = selectedFile.getParent();
+			FILE_PATH = selectedFile.getAbsolutePath();
 		}
 	}
 	
@@ -168,11 +168,15 @@ public class FileProcess {
 			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 			jfc.setDialogTitle("Válassz kitûzési fájlt.");
 			jfc.setAcceptAllFileFilterUsed(false);
+			if( FILE_PATH != null) {
+			jfc.setCurrentDirectory(new File(FILE_PATH));
+			}
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("txt fájlok", "txt");
 			jfc.addChoosableFileFilter(filter);
 			int returnValue = jfc.showOpenDialog(null);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = jfc.getSelectedFile();
+				FILE_PATH = selectedFile.getParent();
 				FILE_NAME = selectedFile.getName();
 		}
 	

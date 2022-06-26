@@ -2,8 +2,9 @@ package mvmxpert.david.giczi.pillarcoordscalculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import mvmxpert.david.giczi.pillarcoordscalculator.enumerator.PointID;
 import mvmxpert.david.giczi.pillarcoordscalculator.fileprocess.FileProcess;
-import mvmxpert.david.giczi.pillarcoordscalculator.enums.PointID;
 
 public class SteakoutControl {
 

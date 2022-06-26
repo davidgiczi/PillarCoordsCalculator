@@ -238,51 +238,32 @@ public class WeightBaseDisplayer extends JFrame {
 		
 		g2d.drawString(pillarBasePoints.get(0).getPointID(),
 				(float) transformedPillarBasePoints.get(0).getX_coord(),
-				(float) transformedPillarBasePoints.get(0).getY_coord());
+				(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
 		for(int i = 1; i < 5; i++) {
-			g2d.setColor(Color.BLACK);
 			g2d.drawString(pillarBasePoints.get(i).getPointID(),
 					(float) transformedPillarBasePoints.get(i).getX_coord() + 10,
 					(float) transformedPillarBasePoints.get(i).getY_coord() + 10);
 		}
-		
-		
-		
-//		AzimuthAndDistance base14 = new AzimuthAndDistance(pillarBasePoints.get(1), pillarBasePoints.get(4));
-//		AzimuthAndDistance tr14 = new AzimuthAndDistance(transformedPillarBasePoints.get(1),
-//				transformedPillarBasePoints.get(4));
-//		AzimuthAndDistance tr34 = new AzimuthAndDistance(transformedPillarBasePoints.get(3),
-//				transformedPillarBasePoints.get(4));
-//		DecimalFormat df = new DecimalFormat("###.###");
-//		g2d.rotate(base14.calcAzimuthFromPointAToPointB() + Math.PI / 2,
-//				(float) transformedPillarBasePoints.get(0).getX_coord(),
-//				(float) transformedPillarBasePoints.get(0).getY_coord());
-//		g2d.drawString(df.format(base14.calcDistanceBetweenTheTwoPoints()) + "m",
-//				(float) transformedPillarBasePoints.get(0).getX_coord() + 10,
-//				(float) (transformedPillarBasePoints.get(0).getY_coord()
-//						- (tr34.calcDistanceBetweenTheTwoPoints() + 10) / 2));
-//		AzimuthAndDistance base68 = new AzimuthAndDistance(pillarBasePoints.get(6), pillarBasePoints.get(8));
-//		g2d.drawString(
-//				df.format((base68.calcDistanceBetweenTheTwoPoints() - base14.calcDistanceBetweenTheTwoPoints()) / 2)
-//						+ "m",
-//				(float) (transformedPillarBasePoints.get(0).getX_coord()
-//						- (tr14.calcDistanceBetweenTheTwoPoints() + 100) / 2),
-//				(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
-//
-//		AzimuthAndDistance base34 = new AzimuthAndDistance(pillarBasePoints.get(3), pillarBasePoints.get(4));
-//		g2d.rotate(-Math.PI / 2, (float) transformedPillarBasePoints.get(0).getX_coord(),
-//				(float) transformedPillarBasePoints.get(0).getY_coord());
-//		g2d.drawString(df.format(base34.calcDistanceBetweenTheTwoPoints()) + "m",
-//				(float) transformedPillarBasePoints.get(0).getX_coord() + 10,
-//				(float) (transformedPillarBasePoints.get(0).getY_coord()
-//						+ (tr14.calcDistanceBetweenTheTwoPoints() - 10) / 2));
-//		AzimuthAndDistance base57 = new AzimuthAndDistance(pillarBasePoints.get(5), pillarBasePoints.get(7));
-//		g2d.drawString(
-//				df.format((base57.calcDistanceBetweenTheTwoPoints() - base34.calcDistanceBetweenTheTwoPoints()) / 2)
-//						+ "m",
-//				(float) (transformedPillarBasePoints.get(0).getX_coord()
-//						- (tr34.calcDistanceBetweenTheTwoPoints() + 100) / 2),
-//				(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
+
+		for(int i = 5; i < 9; i++) {
+		g2d.drawString(pillarBasePoints.get(i).getPointID(),
+				(float) transformedPillarBasePoints.get(i).getX_coord(),
+				(float) transformedPillarBasePoints.get(i).getY_coord());
+		}
+		DecimalFormat df = new DecimalFormat("###.###");
+		AzimuthAndDistance distance1 = new AzimuthAndDistance(pillarBasePoints.get(0), pillarBasePoints.get(1));
+		AzimuthAndDistance distance2 = new AzimuthAndDistance(pillarBasePoints.get(0), pillarBasePoints.get(2));
+		AzimuthAndDistance tr01 = new AzimuthAndDistance(transformedPillarBasePoints.get(0), transformedPillarBasePoints.get(1));
+		g2d.rotate(distance2.calcAzimuthFromPointAToPointB() + Math.PI,
+				transformedPillarBasePoints.get(0).getX_coord(), transformedPillarBasePoints.get(0).getY_coord());
+		g2d.drawString(df.format(distance1.calcDistanceBetweenTheTwoPoints()) + "m", 
+			(float)	(transformedPillarBasePoints.get(0).getX_coord() + tr01.calcDistanceBetweenTheTwoPoints() / 2), 
+			(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
+		g2d.rotate( 3 * Math.PI / 2,
+				transformedPillarBasePoints.get(0).getX_coord(), transformedPillarBasePoints.get(0).getY_coord());
+		g2d.drawString(df.format(distance2.calcDistanceBetweenTheTwoPoints()) + "m", 
+				(float)	(transformedPillarBasePoints.get(0).getX_coord() + tr01.calcDistanceBetweenTheTwoPoints() / 2), 
+				(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
 	}
 
 	@Override
