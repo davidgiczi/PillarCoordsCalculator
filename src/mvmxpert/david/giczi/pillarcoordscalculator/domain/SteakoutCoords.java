@@ -29,6 +29,17 @@ public class SteakoutCoords {
 				"\t" + String.valueOf(Math.round((YcoordForDesignPoint - YcoordForSteakoutPoint) * 1000.0) / 1000.0).replace('.', ',');
 	}
 	
+	public String getPointID() {
+		return pointID;
+	}
+
+	public String getDeltaX() {
+		return String.valueOf(Math.round((XcoordForDesignPoint - XcoordForSteakoutPoint) * 1000.0) / 1000.0);
+	}
+	
+	public String getDeltaY() {
+		return String.valueOf(Math.round((YcoordForDesignPoint - YcoordForSteakoutPoint) * 1000.0) / 1000.0);
+	}
 	
 }
  

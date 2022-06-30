@@ -25,7 +25,7 @@ public class PillarCoordsForWeightBase {
 		this.pillarCenterPoint = pillarCenterPoint;
 		this.axisDirectionPoint = axisDirectonPoint;
 		AzimuthAndDistance azimuthAndDistance = new AzimuthAndDistance(pillarCenterPoint, axisDirectionPoint);
-		this.azimuth = azimuthAndDistance.calcAzimuthFromPointAToPointB();
+		this.azimuth = azimuthAndDistance.calcAzimuth();
 		if(azimuth == Double.NaN) {
 			throw new InvalidAttributeValueException();
 		}

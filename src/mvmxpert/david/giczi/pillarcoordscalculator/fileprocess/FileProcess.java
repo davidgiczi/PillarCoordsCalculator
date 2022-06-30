@@ -16,17 +16,17 @@ import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 public class FileProcess {
 	
 	public static String projectName;
+	private static String FOLDER_PATH;
 	private static String FILE_PATH;
-	private static String FILE_NAME;
 	
 		
 	public static void saveDataForKML(Point pillarCenter) {
 		
-		if(FILE_PATH == null) {
+		if(FOLDER_PATH == null) {
 			return;
 		}
 
-		File file = new File(FILE_PATH + "/" + projectName + "_KML.txt");
+		File file = new File(FOLDER_PATH + "/" + projectName + "_KML.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -42,11 +42,11 @@ public class FileProcess {
 	
 	public static void saveDataForRTK(List<Point> points) {
 		
-		if(FILE_PATH == null) {
+		if(FOLDER_PATH == null) {
 			return;
 		}
 		
-		File file = new File(FILE_PATH + "/" + projectName + "_RTK.txt");
+		File file = new File(FOLDER_PATH + "/" + projectName + "_RTK.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -64,11 +64,11 @@ public class FileProcess {
 	
 	public static void saveDataForTPS(List<Point> points) {
 		
-		if(FILE_PATH == null) {
+		if(FOLDER_PATH == null) {
 			return;
 		}
 		
-		File file = new File(FILE_PATH + "/" + projectName + "_TPS.txt");
+		File file = new File(FOLDER_PATH + "/" + projectName + "_TPS.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -86,11 +86,11 @@ public class FileProcess {
 	
 	public static void saveDataForMS(List<Point> points) {
 		
-		if(FILE_PATH == null) {
+		if(FOLDER_PATH == null) {
 			return;
 		}
 		
-		File file = new File(FILE_PATH + "/" + projectName + "_MS.txt");
+		File file = new File(FOLDER_PATH + "/" + projectName + "_MS.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -108,11 +108,11 @@ public class FileProcess {
 	
 	public static void saveSteakoutPoint(String pointData) {
 		
-		if(FILE_PATH == null) {
+		if(FOLDER_PATH == null) {
 			return;
 		}
 		
-		File file = new File(FILE_PATH + "/" + projectName + "_kit.txt");
+		File file = new File(FOLDER_PATH + "/" + projectName + "_kit.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -131,10 +131,10 @@ public class FileProcess {
 		
 		List<String> pointData = new ArrayList<>();
 		
-		if(FILE_PATH == null || FILE_NAME == null) {
+		if(FILE_PATH == null) {
 			return pointData;
 		}
-		File file = new File(FILE_PATH + "/" + FILE_NAME);
+		File file = new File(FILE_PATH);
 		
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			
@@ -160,7 +160,7 @@ public class FileProcess {
 		int returnValue = jfc.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = jfc.getSelectedFile();
-			FILE_PATH = selectedFile.getAbsolutePath();
+			FOLDER_PATH = selectedFile.getAbsolutePath();
 		}
 	}
 	
@@ -168,16 +168,15 @@ public class FileProcess {
 			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 			jfc.setDialogTitle("Válassz kitûzési fájlt.");
 			jfc.setAcceptAllFileFilterUsed(false);
-			if( FILE_PATH != null) {
-			jfc.setCurrentDirectory(new File(FILE_PATH));
+			if( FOLDER_PATH != null) {
+			jfc.setCurrentDirectory(new File(FOLDER_PATH));
 			}
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("txt fájlok", "txt");
 			jfc.addChoosableFileFilter(filter);
 			int returnValue = jfc.showOpenDialog(null);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = jfc.getSelectedFile();
-				FILE_PATH = selectedFile.getParent();
-				FILE_NAME = selectedFile.getName();
+				FILE_PATH = selectedFile.getAbsolutePath();
 		}
 	
 	}

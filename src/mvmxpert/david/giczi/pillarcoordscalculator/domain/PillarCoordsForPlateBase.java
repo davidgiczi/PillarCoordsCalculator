@@ -25,7 +25,7 @@ public class PillarCoordsForPlateBase {
 		this.pillarCenterPoint = pillarCenterPoint;
 		this.axisDirectionPoint = axisDirectionPoint;
 		AzimuthAndDistance azimuthAndDistance = new AzimuthAndDistance(pillarCenterPoint, axisDirectionPoint);
-		this.azimuth = azimuthAndDistance.calcAzimuthFromPointAToPointB();
+		this.azimuth = azimuthAndDistance.calcAzimuth();
 		if(azimuth == Double.NaN) {
 			throw new InvalidAttributeValueException();
 		}

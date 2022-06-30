@@ -20,8 +20,8 @@ public class PillarCoordsCalculator {
 		Point direction = new Point("44", 636140.474, 131932.424);
 		PillarCoordsForWeightBase pillarCoords = new PillarCoordsForWeightBase(center, direction);
 		pillarCoords.setDistanceOnTheAxis(10);
-		pillarCoords.setHorizontalDistanceBetweenPillarLegs(6);
-		pillarCoords.setVerticalDistanceBetweenPillarLegs(3);
+		pillarCoords.setHorizontalDistanceBetweenPillarLegs(4);
+		pillarCoords.setVerticalDistanceBetweenPillarLegs(5);
 		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(2);
 		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(2);
 		pillarCoords.setAngleValueBetweenMainPath(100);

@@ -55,5 +55,10 @@ public class SteakoutControl {
 		
 		return identifier;
 	}
+
+	public List<SteakoutCoords> getControlledCoords() {
+		return controlledCoords;
+	}
+	
 	
 }

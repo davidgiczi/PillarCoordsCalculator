@@ -11,7 +11,7 @@ public class AzimuthAndDistance {
 		this.pointB = pointB;
 	}
 	
-	public double calcAzimuthFromPointAToPointB() {
+	public double calcAzimuth() {
 		
 		double deltaX = pointB.getX_coord() - pointA.getX_coord();
 		double deltaY = pointB.getY_coord() - pointA.getY_coord();
@@ -38,7 +38,7 @@ public class AzimuthAndDistance {
 		return Double.NaN;
 	}
 	 
-	public double calcDistanceBetweenTheTwoPoints() {
+	public double calcDistance() {
 		return Math.sqrt(Math.pow(pointA.getX_coord() - pointB.getX_coord(), 2)
 				+ Math.pow(pointA.getY_coord() - pointB.getY_coord(), 2));
 	}
