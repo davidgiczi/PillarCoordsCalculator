@@ -250,26 +250,39 @@ public class WeightBaseDisplayer extends JFrame {
  	  	        				azimuthAndDistance.calcAzimuth(), "baseLine");
 	 		if( rotation == 0) {
 	 			g2d.drawString(directionDisplayerPoint.getPointID(), (float) polarPoint.calcPolarPoint().getX_coord(),
-	 					(float) polarPoint.calcPolarPoint().getY_coord() + 50);
+	 					(float) (polarPoint.calcPolarPoint().getY_coord() + 50));
 	 		}
 	 		else {
 	 	  	    g2d.drawString(directionDisplayerPoint.getPointID(), (float) polarPoint.calcPolarPoint().getX_coord(), 
-	 	  		(float) polarPoint.calcPolarPoint().getY_coord() + 50);
+	 	  		(float) (polarPoint.calcPolarPoint().getY_coord() + 50));
 	 		}
 			
 	 	g2d.setColor(Color.BLACK);
-		g2d.drawString("1m", (float) displayerCenterX + 300, (float) displayerCenterY + 290);
-		g2d.drawString("M= 1:200", (float) displayerCenterX + 300, (float) displayerCenterY + 260);
+		g2d.drawString("1m", (float) (displayerCenterX + 300), (float) (displayerCenterY + 290));
+		g2d.drawString("M= 1:200", (float) (displayerCenterX + 300), (float) (displayerCenterY + 260));
 		
 		g2d.drawString(pillarBasePoints.get(0).getPointID(),
-				(float) transformedPillarBasePoints.get(0).getX_coord(),
-				(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
+				(float) (transformedPillarBasePoints.get(0).getX_coord()),
+				(float) (transformedPillarBasePoints.get(0).getY_coord() - 10));
 		for(int i = 1; i < 5; i++) {
 			g2d.drawString(pillarBasePoints.get(i).getPointID(),
-					(float) transformedPillarBasePoints.get(i).getX_coord() + 10,
-					(float) transformedPillarBasePoints.get(i).getY_coord() + 10);
+					(float) (transformedPillarBasePoints.get(i).getX_coord() + 10),
+					(float) (transformedPillarBasePoints.get(i).getY_coord() + 10));
 		}
-
+		
+		g2d.drawString(pillarBasePoints.get(5).getPointID(),
+					(float) (transformedPillarBasePoints.get(5).getX_coord() + 10),
+					(float) (transformedPillarBasePoints.get(5).getY_coord() + 20));
+		g2d.drawString(pillarBasePoints.get(6).getPointID(),
+				(float) (transformedPillarBasePoints.get(6).getX_coord() - 20),
+				(float) (transformedPillarBasePoints.get(6).getY_coord() - 10));
+		g2d.drawString(pillarBasePoints.get(7).getPointID(),
+				(float) (transformedPillarBasePoints.get(7).getX_coord() + 10),
+				(float) (transformedPillarBasePoints.get(7).getY_coord() - 20));
+		g2d.drawString(pillarBasePoints.get(8).getPointID(),
+				(float) (transformedPillarBasePoints.get(8).getX_coord() + 10),
+				(float) (transformedPillarBasePoints.get(8).getY_coord() - 20));
+		
 		DecimalFormat df = new DecimalFormat("###.###");
 		AzimuthAndDistance distance1 = new AzimuthAndDistance(pillarBasePoints.get(0), pillarBasePoints.get(1));
 		AzimuthAndDistance distance2 = new AzimuthAndDistance(pillarBasePoints.get(0), pillarBasePoints.get(2));
@@ -278,12 +291,12 @@ public class WeightBaseDisplayer extends JFrame {
 				transformedPillarBasePoints.get(0).getX_coord(), transformedPillarBasePoints.get(0).getY_coord());
 		g2d.drawString(df.format(distance1.calcDistance()) + "m", 
 			(float)	(transformedPillarBasePoints.get(0).getX_coord() + tr01.calcDistance() / 2), 
-			(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
+			(float) (transformedPillarBasePoints.get(0).getY_coord() - 10));
 		g2d.rotate( 3 * Math.PI / 2,
 				transformedPillarBasePoints.get(0).getX_coord(), transformedPillarBasePoints.get(0).getY_coord());
 		g2d.drawString(df.format(distance2.calcDistance()) + "m", 
 				(float)	(transformedPillarBasePoints.get(0).getX_coord() + tr01.calcDistance() / 2), 
-				(float) transformedPillarBasePoints.get(0).getY_coord() - 10);
+				(float) (transformedPillarBasePoints.get(0).getY_coord() - 10));
 	}
 	
 	private void drawBaseWithSize(Graphics g) {
@@ -405,11 +418,7 @@ public class WeightBaseDisplayer extends JFrame {
 				x - verticalPath / 2 - 35, y - horizontalDistance / 2));
 		g2d.draw(new Line2D.Double(x - verticalPath / 2 - 45, y + horizontalDistance / 2,
 				x - verticalPath / 2 - 35, y + horizontalDistance / 2));
-		g2d.drawString(pillarBasePoints.get(0).getPointID(), (int) (x + 5), (int) (y - 5));
-		g2d.drawString(pillarBasePoints.get(5).getPointID(), (int) (x - 20), (int) (y + horizontalPath / 2) + 20);
-		g2d.drawString(pillarBasePoints.get(6).getPointID(), (int) (x - verticalPath / 2 ) - 30, (int) (y + 5));
-		g2d.drawString(pillarBasePoints.get(7).getPointID(), (int) (x - 20), (int) (y - horizontalPath / 2) - 10);
-		g2d.drawString(pillarBasePoints.get(8).getPointID(), (int) (x + verticalPath / 2 ), (int) (y + 5));
+	
 		DecimalFormat df = new DecimalFormat("###.###");
 		AzimuthAndDistance verticalHoleDistance = new AzimuthAndDistance(pillarBasePoints.get(9), pillarBasePoints.get(10));
 		AzimuthAndDistance verticalPathDistance =
