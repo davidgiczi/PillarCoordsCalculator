@@ -304,46 +304,95 @@ public class WeightBaseDisplayer extends JFrame {
                 BasicStroke.JOIN_MITER, 1.0f, dashingPattern, 2.0f);
         g2d.setStroke(stroke);
         double x = 1300;
-        double y = 200;
+        double y = 300;
 		g2d.draw(new Line2D.Double(x, y, x + verticalPath /2, y));
 		g2d.draw(new Line2D.Double(x, y, x - verticalPath / 2, y));
 		g2d.draw(new Line2D.Double(x, y, x, y - horizontalPath / 2));
 		g2d.draw(new Line2D.Double(x, y, x, y + horizontalPath / 2));
 		g2d.setColor(Color.BLUE);
-		g2d.setStroke(new BasicStroke(2));
+		g2d.setStroke(new BasicStroke(2)); //left-up hole
 		g2d.draw(new Line2D.Double(x - verticalPath / 2 + verticalHoleSize, y - horizontalPath / 2 + horizontalHoleSize,
 				x - verticalPath / 2 + verticalHoleSize, y - horizontalPath / 2));
 		g2d.draw(new Line2D.Double(x - verticalPath / 2 + verticalHoleSize, y - horizontalPath / 2,
 				x - verticalPath / 2, y - horizontalPath / 2));
 		g2d.draw(new Line2D.Double(x - verticalPath / 2, y - horizontalPath / 2,
-				x - verticalPath / 2, y - horizontalPath / 2 + verticalHoleSize));
-		g2d.draw(new Line2D.Double(x - verticalPath / 2, y - horizontalPath / 2 + verticalHoleSize,
+				x - verticalPath / 2, y - horizontalPath / 2 + horizontalHoleSize));
+		g2d.draw(new Line2D.Double(x - verticalPath / 2, y - horizontalPath / 2 + horizontalHoleSize,
 				x - verticalPath / 2 + verticalHoleSize, y - horizontalPath / 2 + horizontalHoleSize));
+		
+		g2d.setColor(Color.BLACK);
+		g2d.drawString(pillarBasePoints.get(20).getPointID(), (int) (x - verticalPath / 2 + verticalHoleSize - 20), 
+															(int) (y - horizontalPath / 2 + horizontalHoleSize + 15));
+		g2d.drawString(pillarBasePoints.get(17).getPointID(), (int) (x - verticalPath / 2 + verticalHoleSize - 20), 
+				(int) (y - horizontalPath / 2 - 5));
+		g2d.drawString(pillarBasePoints.get(19).getPointID(), (int) (x - verticalPath / 2 - 20), 
+															(int) (y - horizontalPath / 2 + horizontalHoleSize + 15));
+		g2d.drawString(pillarBasePoints.get(18).getPointID(), (int) (x - verticalPath / 2 - 20), 
+				(int) (y - horizontalPath / 2 - 5));
+		
+		//right-up hole
+		g2d.setColor(Color.BLUE);
 		g2d.draw(new Line2D.Double(x + verticalPath / 2 - verticalHoleSize, y - horizontalPath / 2 + horizontalHoleSize,
 				x + verticalPath / 2 - verticalHoleSize, y - horizontalPath / 2));
 		g2d.draw(new Line2D.Double(x + verticalPath / 2 - verticalHoleSize, y - horizontalPath / 2,
 				x + verticalPath / 2, y - horizontalPath / 2));
 		g2d.draw(new Line2D.Double(x + verticalPath / 2, y - horizontalPath / 2,
-				x + verticalPath / 2, y - horizontalPath / 2 + verticalHoleSize));
-		g2d.draw(new Line2D.Double(x + verticalPath / 2, y - horizontalPath / 2 + verticalHoleSize,
+				x + verticalPath / 2, y - horizontalPath / 2 + horizontalHoleSize));
+		g2d.draw(new Line2D.Double(x + verticalPath / 2, y - horizontalPath / 2 + horizontalHoleSize,
 				x + verticalPath / 2 - verticalHoleSize, y - horizontalPath / 2 + horizontalHoleSize));
+		
+		g2d.setColor(Color.BLACK);
+		g2d.drawString(pillarBasePoints.get(16).getPointID(), (int) (x + verticalPath / 2 - verticalHoleSize - 20), 
+															(int) (y - horizontalPath / 2 + horizontalHoleSize + 15));
+		g2d.drawString(pillarBasePoints.get(13).getPointID(), (int) (x + verticalPath / 2 - 20), 
+				(int) (y - horizontalPath / 2 + horizontalHoleSize + 15));
+		g2d.drawString(pillarBasePoints.get(14).getPointID(), (int) (x + verticalPath / 2 - 20), 
+															(int) (y - horizontalPath / 2 - 5));
+		g2d.drawString(pillarBasePoints.get(15).getPointID(), (int) (x + verticalPath / 2 - verticalHoleSize - 20), 
+				(int) (y - horizontalPath / 2 - 5));
+		
+		//left-down hole
+		g2d.setColor(Color.BLUE);
 		g2d.draw(new Line2D.Double(x + verticalPath / 2 - verticalHoleSize, y + horizontalPath / 2 - horizontalHoleSize,
 				x + verticalPath / 2 - verticalHoleSize, y + horizontalPath / 2));
 		g2d.draw(new Line2D.Double(x + verticalPath / 2 - verticalHoleSize, y + horizontalPath / 2,
 				x + verticalPath / 2, y + horizontalPath / 2));
 		g2d.draw(new Line2D.Double(x + verticalPath / 2, y + horizontalPath / 2,
-				x + verticalPath / 2, y + horizontalPath / 2 - verticalHoleSize));
-		g2d.draw(new Line2D.Double(x + verticalPath / 2, y + horizontalPath / 2 - verticalHoleSize,
+				x + verticalPath / 2, y + horizontalPath / 2 - horizontalHoleSize));
+		g2d.draw(new Line2D.Double(x + verticalPath / 2, y + horizontalPath / 2 - horizontalHoleSize,
 				x + verticalPath / 2 - verticalHoleSize, y + horizontalPath / 2 - horizontalHoleSize));
+		
+		g2d.setColor(Color.BLACK);
+		g2d.drawString(pillarBasePoints.get(24).getPointID(), (int) (x - verticalPath / 2 + verticalHoleSize - 20), 
+															(int) (y + horizontalPath / 2 - horizontalHoleSize - 5));
+		g2d.drawString(pillarBasePoints.get(23).getPointID(), (int) (x - verticalPath / 2 + verticalHoleSize - 20), 
+				(int) (y + horizontalPath / 2 + 15));
+		g2d.drawString(pillarBasePoints.get(21).getPointID(), (int) (x - verticalPath / 2 - 20), 
+															(int) (y + horizontalPath / 2 - horizontalHoleSize - 5));
+		g2d.drawString(pillarBasePoints.get(22).getPointID(), (int) (x - verticalPath / 2 - 20), 
+				(int) (y + horizontalPath / 2 + 15));
+		
+		//right-down hole
+		g2d.setColor(Color.BLUE);
 		g2d.draw(new Line2D.Double(x - verticalPath / 2 + verticalHoleSize, y + horizontalPath / 2 - horizontalHoleSize,
 				x - verticalPath / 2 + verticalHoleSize, y + horizontalPath / 2));
 		g2d.draw(new Line2D.Double(x - verticalPath / 2 + verticalHoleSize, y + horizontalPath / 2,
 				x - verticalPath / 2, y + horizontalPath / 2));
 		g2d.draw(new Line2D.Double(x - verticalPath / 2, y + horizontalPath / 2,
-				x - verticalPath / 2, y + horizontalPath / 2 - verticalHoleSize));
-		g2d.draw(new Line2D.Double(x - verticalPath / 2, y + horizontalPath / 2 - verticalHoleSize,
+				x - verticalPath / 2, y + horizontalPath / 2 - horizontalHoleSize));
+		g2d.draw(new Line2D.Double(x - verticalPath / 2, y + horizontalPath / 2 - horizontalHoleSize,
 				x - verticalPath / 2 + verticalHoleSize, y + horizontalPath / 2 - horizontalHoleSize));
+		
 		g2d.setColor(Color.BLACK);
+		g2d.drawString(pillarBasePoints.get(11).getPointID(), (int) (x + verticalPath / 2 - verticalHoleSize - 20), 
+															(int) (y + horizontalPath / 2 - horizontalHoleSize - 5));
+		g2d.drawString(pillarBasePoints.get(12).getPointID(), (int) (x + verticalPath / 2 - 20), 
+				(int) (y + horizontalPath / 2 - horizontalHoleSize  - 5));
+		g2d.drawString(pillarBasePoints.get(9).getPointID(), (int) (x + verticalPath / 2 - 20), 
+															(int) (y + horizontalPath / 2 + 15));
+		g2d.drawString(pillarBasePoints.get(10).getPointID(), (int) (x + verticalPath / 2 - verticalHoleSize - 20), 
+				(int) (y + horizontalPath / 2 + 15));
+		
 		g2d.draw(new Line2D.Double(x - verticalDistance / 2, y - horizontalPath / 2 - 40, 
 				x + verticalDistance / 2, y - horizontalPath / 2 - 40));
 		g2d.draw(new Line2D.Double(x - verticalDistance / 2, y - horizontalPath / 2 - 45, 
@@ -356,7 +405,7 @@ public class WeightBaseDisplayer extends JFrame {
 				x - verticalPath / 2 - 35, y - horizontalDistance / 2));
 		g2d.draw(new Line2D.Double(x - verticalPath / 2 - 45, y + horizontalDistance / 2,
 				x - verticalPath / 2 - 35, y + horizontalDistance / 2));
-		g2d.drawString(pillarBasePoints.get(0).getPointID(), 1290, 190);
+		g2d.drawString(pillarBasePoints.get(0).getPointID(), (int) (x + 5), (int) (y - 5));
 		g2d.drawString(pillarBasePoints.get(5).getPointID(), (int) (x - 20), (int) (y + horizontalPath / 2) + 20);
 		g2d.drawString(pillarBasePoints.get(6).getPointID(), (int) (x - verticalPath / 2 ) - 30, (int) (y + 5));
 		g2d.drawString(pillarBasePoints.get(7).getPointID(), (int) (x - 20), (int) (y - horizontalPath / 2) - 10);
