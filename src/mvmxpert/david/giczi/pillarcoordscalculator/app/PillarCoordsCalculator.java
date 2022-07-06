@@ -36,24 +36,24 @@ public class PillarCoordsCalculator {
 //		displayer.setControlledCoords(stk.getControlledCoords());
 		
 		
-//		FileProcess.projectName = "FETO_T12-T11_oszlop";
-//		FileProcess.setFolder();
-		Point center = new Point("T12", 731077.8079, 105128.6198);
-		Point direction = new Point("T11", 731288.2036, 105251.3606);
+		FileProcess.projectName = "FETO_T6-T9_oszlop";
+		FileProcess.setFolder();
+		Point center = new Point("T9", 731397.828, 105698.180);
+		Point direction = new Point("T10", 731504.144, 105377.336);
 		PillarCoordsForPlateBase pillarCoords = new PillarCoordsForPlateBase(center, direction);
-		pillarCoords.setHorizontalSizeOfHole(8.6);
-		pillarCoords.setVerticalSizeOfHole(8.6);
+		pillarCoords.setHorizontalSizeOfHole(9.1);
+		pillarCoords.setVerticalSizeOfHole(9.1);
 		pillarCoords.setHorizontalDistanceFromTheSideOfHole(6);
 		pillarCoords.setVerticalDistanceFromTheSideOfHole(6);
 		//pillarCoords.setAngleValueBetweenMainPath(120);
 		pillarCoords.calculatePillarPoints();
-//		FileProcess.setSteakoutFile();
+		FileProcess.setSteakoutFile();
 		SteakoutControl stk = new SteakoutControl(pillarCoords.getPillarPoints(), PointID.POSTFIX, "_STK", ";");
 		stk.controlSteakout();
 		PlateBaseDisplayer displayer =new PlateBaseDisplayer(pillarCoords.getPillarPoints(), 
 									   pillarCoords.getAxisDirectionPoint(),
 									   pillarCoords.getRadRotation(),
-									   "FETO T6-T12 Pillars");
+									   "FETO T6-T9 Pillars");
 		displayer.setControlledCoords(stk.getControlledCoords());
 	}
 	
