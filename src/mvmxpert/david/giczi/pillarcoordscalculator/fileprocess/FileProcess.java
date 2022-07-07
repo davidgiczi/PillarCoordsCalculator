@@ -154,7 +154,7 @@ public class FileProcess {
 	
 	public static void setFolder() {
 		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-		jfc.setDialogTitle("Válassz mentési mappát.");
+		jfc.setDialogTitle("Válassz mentési mappát a projektnek.");
 		jfc.setAcceptAllFileFilterUsed(false);
 		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnValue = jfc.showOpenDialog(null);
@@ -178,6 +178,7 @@ public class FileProcess {
 				File selectedFile = jfc.getSelectedFile();
 				FILE_PATH = selectedFile.getAbsolutePath();
 		}
+			
 	
 	}
 }
