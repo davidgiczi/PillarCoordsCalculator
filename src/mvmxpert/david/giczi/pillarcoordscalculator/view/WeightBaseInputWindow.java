@@ -5,6 +5,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -14,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
 
 
 public class WeightBaseInputWindow {
@@ -36,10 +39,15 @@ public class WeightBaseInputWindow {
 	public JTextField rotateAngularField;
 	public JTextField rotateAngularMinField;
 	public JTextField rotateAngularSecField;
+	public JCheckBox tps;
+	public JCheckBox rtk;
+	public JCheckBox kml;
+	public JCheckBox ms;
+	public JCheckBox all;
 	
-	public WeightBaseInputWindow() {
+	public WeightBaseInputWindow(String projectName) {
 	
-		homeFrame = new JFrame("Súlyalap pontjainak számítása");
+		homeFrame = new JFrame(projectName);
 		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		homeFrame.setSize(400, 800);
 		homeFrame.setLocationRelativeTo(null);
@@ -244,32 +252,71 @@ public class WeightBaseInputWindow {
 		panel.setBorder(BorderFactory
 				.createTitledBorder(BorderFactory.createEtchedBorder(),
 						"Kimeneti fájlok megadása", TitledBorder.CENTER, TitledBorder.TOP, font1, color));
-		JCheckBox tps = new JCheckBox("Mérõállomás formátumban");
+		tps = new JCheckBox("Mérõállomás formátumban");
 		tps.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tps.setBackground(Color.WHITE);
 		tps.setFont(font2);
+		tps.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				all.setSelected(false);
+			}
+		});
 		panel.add(tps);
-		JCheckBox rtk = new JCheckBox("GPS formátumban");
+		rtk = new JCheckBox("GPS formátumban");
 		rtk.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		rtk.setBackground(Color.WHITE);
 		rtk.setFont(font2);
+		rtk.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				all.setSelected(false);
+			}
+		});
 		panel.add(rtk);
 		panel.add(Box.createHorizontalStrut(30));
-		JCheckBox kml = new JCheckBox("KML formátumban");
+		kml = new JCheckBox("KML formátumban");
 		kml.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		kml.setBackground(Color.WHITE);
 		kml.setFont(font2);
+		kml.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				all.setSelected(false);
+			}
+		});
 		panel.add(kml);
-		JCheckBox ms = new JCheckBox("Microstation formátumban");
+		ms = new JCheckBox("Microstation formátumban");
 		ms.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		ms.setBackground(Color.WHITE);
 		ms.setFont(font2);
+		ms.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				all.setSelected(false);
+			}
+		});
 		panel.add(ms);
 		panel.add(Box.createHorizontalStrut(100));
-		JCheckBox all = new JCheckBox("Mindegyik formátumban", true);
+		all = new JCheckBox("Mindegyik formátumban", true);
 		all.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		all.setBackground(Color.WHITE);
 		all.setFont(font2);
+		all.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				tps.setSelected(false);
+				rtk.setSelected(false);
+				kml.setSelected(false);
+				ms.setSelected(false);
+			}
+		});
 		panel.add(all);
 		homeFrame.add(panel);
 	}

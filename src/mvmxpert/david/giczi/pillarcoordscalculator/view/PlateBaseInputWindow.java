@@ -5,6 +5,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -35,10 +37,15 @@ public class PlateBaseInputWindow {
 	public JTextField rotateAngularField;
 	public JTextField rotateAngularMinField;
 	public JTextField rotateAngularSecField;
+	public JCheckBox tps;
+	public JCheckBox rtk;
+	public JCheckBox kml;
+	public JCheckBox ms;
+	public JCheckBox all;
 	
-	public PlateBaseInputWindow() {
+	public PlateBaseInputWindow(String projectName) {
 	
-		homeFrame = new JFrame("Lemezalap pontjainak sz·mÌt·sa");
+		homeFrame = new JFrame(projectName);
 		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		homeFrame.setSize(400, 800);
 		homeFrame.setLocationRelativeTo(null);
@@ -232,32 +239,75 @@ public class PlateBaseInputWindow {
 		panel.setBorder(BorderFactory
 				.createTitledBorder(BorderFactory.createEtchedBorder(),
 						"Kimeneti f·jlok megad·sa", TitledBorder.CENTER, TitledBorder.TOP, font1, color));
-		JCheckBox tps = new JCheckBox("MÈrı·llom·s form·tumban");
+		tps = new JCheckBox("MÈrı·llom·s form·tumban");
 		tps.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tps.setBackground(Color.WHITE);
 		tps.setFont(font2);
+		tps.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				all.setSelected(false);
+				
+			}
+		});
 		panel.add(tps);
-		JCheckBox rtk = new JCheckBox("GPS form·tumban");
+		rtk = new JCheckBox("GPS form·tumban");
 		rtk.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		rtk.setBackground(Color.WHITE);
 		rtk.setFont(font2);
+		rtk.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				all.setSelected(false);
+				
+			}
+		});
 		panel.add(rtk);
 		panel.add(Box.createHorizontalStrut(30));
-		JCheckBox kml = new JCheckBox("KML form·tumban");
+		kml = new JCheckBox("KML form·tumban");
 		kml.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		kml.setBackground(Color.WHITE);
 		kml.setFont(font2);
+		kml.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				all.setSelected(false);
+				
+			}
+		});
 		panel.add(kml);
-		JCheckBox ms = new JCheckBox("Microstation form·tumban");
+		ms = new JCheckBox("Microstation form·tumban");
 		ms.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		ms.setBackground(Color.WHITE);
 		ms.setFont(font2);
+		ms.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				all.setSelected(false);
+				
+			}
+		});
 		panel.add(ms);
 		panel.add(Box.createHorizontalStrut(100));
-		JCheckBox all = new JCheckBox("Mindegyik form·tumban", true);
+		all = new JCheckBox("Mindegyik form·tumban", true);
 		all.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		all.setBackground(Color.WHITE);
 		all.setFont(font2);
+		all.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				tps.setSelected(false);
+				rtk.setSelected(false);
+				kml.setSelected(false);
+				ms.setSelected(false);
+			}
+		});
 		panel.add(all);
 		homeFrame.add(panel);
 	}
@@ -271,8 +321,4 @@ public class PlateBaseInputWindow {
 		homeFrame.add(panel);
 	}
 	
-	
-	public static void main(String[] args) {
-		new PlateBaseInputWindow();
-	}
 }
