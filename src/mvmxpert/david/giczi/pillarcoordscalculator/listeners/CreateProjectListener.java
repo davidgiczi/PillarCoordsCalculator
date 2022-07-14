@@ -1,15 +1,14 @@
 package mvmxpert.david.giczi.pillarcoordscalculator.listeners;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalculatorController;
 
 public class CreateProjectListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
-		
-		
+		PillarCoordsCalculatorController.setProjectName();
 	}
 
 	@Override

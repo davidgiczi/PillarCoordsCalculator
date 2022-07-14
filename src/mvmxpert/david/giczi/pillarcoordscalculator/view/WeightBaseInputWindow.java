@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalculatorController;
+
 
 
 public class WeightBaseInputWindow {
@@ -48,7 +50,7 @@ public class WeightBaseInputWindow {
 	public WeightBaseInputWindow(String projectName) {
 	
 		homeFrame = new JFrame(projectName);
-		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		homeFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		homeFrame.setSize(400, 800);
 		homeFrame.setLocationRelativeTo(null);
 		homeFrame.setLocation((int) (homeFrame.getLocation().getX() - 100), (int) homeFrame.getLocation().getY());
@@ -327,6 +329,13 @@ public class WeightBaseInputWindow {
 		JButton ok = new JButton("Számol");
 		ok.setFont(font2);
 		ok.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		ok.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PillarCoordsCalculatorController.clickButtonOnWeightBaseInputWindow();
+			}
+		});
 		panel.add(ok);
 		homeFrame.add(panel);
 	}

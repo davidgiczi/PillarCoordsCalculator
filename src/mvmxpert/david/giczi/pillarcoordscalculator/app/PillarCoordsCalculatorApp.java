@@ -57,7 +57,7 @@ public class PillarCoordsCalculatorApp {
 //		FileProcess.setSteakoutFile();
 //		SteakoutControl stk = new SteakoutControl(pillarCoords.getPillarPoints(), PointID.POSTFIX, "_STK", ";");
 //		stk.controlSteakout();
-//		PlateBaseDisplayer displayer =new PlateBaseDisplayer(pillarCoords.getPillarPoints(), 
+//		PlateBaseDisplayer displayer = new PlateBaseDisplayer(pillarCoords.getPillarPoints(), 
 //									   pillarCoords.getAxisDirectionPoint(),
 //									   pillarCoords.getRadRotation(),
 //									   "FETO T6-T9 Pillars");

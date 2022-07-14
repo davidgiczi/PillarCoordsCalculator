@@ -45,7 +45,7 @@ public class WeightBaseDisplayer extends JFrame {
 	 			displayerCenterY - Math.round((directionPoint.getY_coord() - pillarBasePoints.get(0).getY_coord()) * 1000.0) / SCALE);
 		transformPillarCoordsForDisplayer();
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
 		setLocationRelativeTo(null);
 		setVisible(true);

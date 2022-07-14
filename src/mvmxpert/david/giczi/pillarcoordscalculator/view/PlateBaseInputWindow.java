@@ -7,7 +7,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -17,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalculatorController;
 
 public class PlateBaseInputWindow {
 
@@ -30,8 +31,8 @@ public class PlateBaseInputWindow {
 	public JTextField directionIdField;
 	public JTextField y_directionField;
 	public JTextField x_directionField;
-	public JTextField horizontalSizeForHoleField;
-	public JTextField verticalSizeForHoleField;
+	public JTextField horizontalSizeOfHoleField;
+	public JTextField verticalSizeOfHoleField;
 	public JTextField horizontalDistanceFromHoleSideField;
 	public JTextField verticalDistanceFromHoleSideField;
 	public JTextField rotateAngularField;
@@ -46,7 +47,7 @@ public class PlateBaseInputWindow {
 	public PlateBaseInputWindow(String projectName) {
 	
 		homeFrame = new JFrame(projectName);
-		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		homeFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		homeFrame.setSize(400, 800);
 		homeFrame.setLocationRelativeTo(null);
 		homeFrame.setLocation((int) (homeFrame.getLocation().getX() - 100), (int) homeFrame.getLocation().getY());
@@ -158,10 +159,10 @@ public class PlateBaseInputWindow {
 		panel.add(horizontalSizeForHoleText);
 		
 		panel.add(Box.createHorizontalStrut(120));
-		horizontalSizeForHoleField = new JTextField(15);
-		horizontalSizeForHoleField.setFont(font2);
-		horizontalSizeForHoleField.setForeground(color);
-		panel.add(horizontalSizeForHoleField);
+		horizontalSizeOfHoleField = new JTextField(15);
+		horizontalSizeOfHoleField.setFont(font2);
+		horizontalSizeOfHoleField.setForeground(color);
+		panel.add(horizontalSizeOfHoleField);
 		panel.add(new JLabel("m"));
 		
 		JLabel verticalSizeForHoleText = new JLabel("Az alap gödrének mérete a nyomvonalra merõlegesen");
@@ -170,10 +171,10 @@ public class PlateBaseInputWindow {
 		panel.add(verticalSizeForHoleText);
 		
 		panel.add(Box.createHorizontalStrut(120));
-		verticalSizeForHoleField = new JTextField(15);
-		verticalSizeForHoleField.setFont(font2);
-		verticalSizeForHoleField.setForeground(color);
-		panel.add(verticalSizeForHoleField);
+		verticalSizeOfHoleField = new JTextField(15);
+		verticalSizeOfHoleField.setFont(font2);
+		verticalSizeOfHoleField.setForeground(color);
+		panel.add(verticalSizeOfHoleField);
 		panel.add(new JLabel("m"));
 		
 			
@@ -228,7 +229,6 @@ public class PlateBaseInputWindow {
 		
 		homeFrame.add(panel);
 	}
-	
 	
 	private void setOutputData() {
 		JPanel panel = new JPanel();
@@ -317,6 +317,13 @@ public class PlateBaseInputWindow {
 		JButton ok = new JButton("Számol");
 		ok.setFont(font2);
 		ok.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		ok.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PillarCoordsCalculatorController.clickButtonOnPlateBaseInputWindow();
+			}
+		});
 		panel.add(ok);
 		homeFrame.add(panel);
 	}

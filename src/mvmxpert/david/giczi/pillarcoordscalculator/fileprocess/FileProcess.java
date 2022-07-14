@@ -16,7 +16,7 @@ import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 public class FileProcess {
 	
 	public static String projectName;
-	private static String FOLDER_PATH;
+	public static String FOLDER_PATH;
 	private static String FILE_PATH;
 	
 		
