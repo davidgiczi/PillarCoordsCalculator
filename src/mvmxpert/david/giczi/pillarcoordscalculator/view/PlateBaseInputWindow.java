@@ -21,7 +21,7 @@ import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalcul
 
 public class PlateBaseInputWindow {
 
-	private JFrame homeFrame;
+	public JFrame inputFrameForPlateBase;
 	private Color color = new Color(112,128,144);
 	private Font font1 = new Font("Arial", Font.PLAIN, 16);
 	private Font font2 = new Font("Arial", Font.BOLD, 13);
@@ -46,18 +46,18 @@ public class PlateBaseInputWindow {
 	
 	public PlateBaseInputWindow(String projectName) {
 	
-		homeFrame = new JFrame(projectName);
-		homeFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		homeFrame.setSize(400, 800);
-		homeFrame.setLocationRelativeTo(null);
-		homeFrame.setLocation((int) (homeFrame.getLocation().getX() - 100), (int) homeFrame.getLocation().getY());
-		homeFrame.setLayout(new FlowLayout());
+		inputFrameForPlateBase = new JFrame(projectName);
+		inputFrameForPlateBase.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		inputFrameForPlateBase.setSize(400, 800);
+		inputFrameForPlateBase.setLocationRelativeTo(null);
+		inputFrameForPlateBase.setLocation((int) (inputFrameForPlateBase.getLocation().getX() - 100), (int) inputFrameForPlateBase.getLocation().getY());
+		inputFrameForPlateBase.setLayout(new FlowLayout());
 		setPillarPointsData();
 		setPillarSizeData();
 		setOutputData();
 		addOkButton();
-		homeFrame.setResizable(false);
-		homeFrame.setVisible(true);
+		inputFrameForPlateBase.setResizable(false);
+		inputFrameForPlateBase.setVisible(true);
 	}
 	
 	private void setPillarPointsData() {
@@ -88,20 +88,20 @@ public class PlateBaseInputWindow {
 		centerYText.setFont(font2);
 		panel.add(centerYText);
 		panel.add(Box.createHorizontalStrut(30));
-		y_centerField = new JTextField(15);
-		y_centerField.setFont(font2);
-		y_centerField.setForeground(color);
-		panel.add(y_centerField);
+		x_centerField = new JTextField(15);
+		x_centerField.setFont(font2);
+		x_centerField.setForeground(color);
+		panel.add(x_centerField);
 		panel.add(new JLabel("m"));
 		
 		JLabel centerXText = new JLabel("X koordináta:");
 		centerXText.setFont(font2);
 		panel.add(centerXText);
 		panel.add(Box.createHorizontalStrut(30));
-		x_centerField = new JTextField(15);
-		x_centerField.setFont(font2);
-		x_centerField.setForeground(color);
-		panel.add(x_centerField);
+		y_centerField = new JTextField(15);
+		y_centerField.setFont(font2);
+		y_centerField.setForeground(color);
+		panel.add(y_centerField);
 		panel.add(new JLabel("m"));
 		
 		panel.add(Box.createVerticalStrut(30));
@@ -123,23 +123,23 @@ public class PlateBaseInputWindow {
 		directionYText.setFont(font2);
 		panel.add(directionYText);
 		panel.add(Box.createHorizontalStrut(30));
-		y_directionField = new JTextField(15);
-		y_directionField.setFont(font2);
-		y_directionField.setForeground(color);
-		panel.add(y_directionField);
-		panel.add(new JLabel("m"));
-		
-		JLabel directionXText = new JLabel("X koordináta:");
-		directionXText.setFont(font2);
-		panel.add(directionXText);
-		panel.add(Box.createHorizontalStrut(30));
 		x_directionField = new JTextField(15);
 		x_directionField.setFont(font2);
 		x_directionField.setForeground(color);
 		panel.add(x_directionField);
 		panel.add(new JLabel("m"));
 		
-		homeFrame.add(panel);
+		JLabel directionXText = new JLabel("X koordináta:");
+		directionXText.setFont(font2);
+		panel.add(directionXText);
+		panel.add(Box.createHorizontalStrut(30));
+		y_directionField = new JTextField(15);
+		y_directionField.setFont(font2);
+		y_directionField.setForeground(color);
+		panel.add(y_directionField);
+		panel.add(new JLabel("m"));
+		
+		inputFrameForPlateBase.add(panel);
 
 	}
 	
@@ -227,7 +227,7 @@ public class PlateBaseInputWindow {
 		panel.add(rotateAngularSecField);
 		panel.add(new JLabel("mperc"));
 		
-		homeFrame.add(panel);
+		inputFrameForPlateBase.add(panel);
 	}
 	
 	private void setOutputData() {
@@ -309,7 +309,7 @@ public class PlateBaseInputWindow {
 			}
 		});
 		panel.add(all);
-		homeFrame.add(panel);
+		inputFrameForPlateBase.add(panel);
 	}
 	
 	private void addOkButton() {
@@ -325,7 +325,7 @@ public class PlateBaseInputWindow {
 			}
 		});
 		panel.add(ok);
-		homeFrame.add(panel);
+		inputFrameForPlateBase.add(panel);
 	}
 	
 }

@@ -15,31 +15,32 @@ import mvmxpert.david.giczi.pillarcoordscalculator.view.WeightBaseDisplayer;
 public class PillarCoordsCalculatorApp {
 
 	public static void main(String[] args) throws InvalidAttributeValueException {
-		
-		
+				
 		new PillarCoordsCalculatorController();
 		
-	
-//
-//		FileProcess.projectName = "Paks_43_oszlop";
+//		FileProcess.projectName = "Paks-Sándorfalva_20_oszlop_kit";
 //		FileProcess.setFolder();
-//		Point center = new Point("43", 636057.220, 132220.455);
-//		Point direction = new Point("44", 636140.474, 131932.424);
+//		Point center = new Point("20", 637171.14, 128910.0);
+//		Point direction = new Point("21", 637282.9494, 128524.4136);
 //		PillarCoordsForWeightBase pillarCoords = new PillarCoordsForWeightBase(center, direction);
-//		pillarCoords.setDistanceOnTheAxis(7);
-//		pillarCoords.setHorizontalDistanceBetweenPillarLegs(4.26);
-//		pillarCoords.setVerticalDistanceBetweenPillarLegs(4.88);
-//		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(2);
-//		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(2);
+//		pillarCoords.setDistanceOnTheAxis(10);
+//		pillarCoords.setHorizontalDistanceBetweenPillarLegs(6.08);
+//		pillarCoords.setVerticalDistanceBetweenPillarLegs(7.6);
+//		pillarCoords.setHorizontalSizeOfHoleOfPillarLeg(4);
+//		pillarCoords.setVerticalSizeOfHoleOfPillarLeg(4);
 //		pillarCoords.setAngleValueBetweenMainPath(90);
 //		pillarCoords.calculatePillarPoints();
+//		FileProcess.saveDataForKML(center);
+//		FileProcess.saveDataForRTK(pillarCoords.getPillarPoints());
+//		FileProcess.saveDataForTPS(pillarCoords.getPillarPoints());
+//		FileProcess.saveDataForMS(pillarCoords.getPillarPoints());
 //		FileProcess.setSteakoutFile();
 //		SteakoutControl stk = new SteakoutControl(pillarCoords.getPillarPoints(), PointID.POSTFIX, "_STK", ";");
 //		stk.controlSteakout();
 //		WeightBaseDisplayer displayer = new WeightBaseDisplayer(pillarCoords.getPillarPoints(),
 //								pillarCoords.getAxisDirectionPoint(),
 //								pillarCoords.getRadRotation(),
-//								"Paks 43. oszlop");
+//								FileProcess.projectName);
 //		displayer.setControlledCoords(stk.getControlledCoords());
 		
 		

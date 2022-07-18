@@ -25,7 +25,7 @@ public class PlateBaseDisplayer extends JFrame{
 	
 	private List<Point> pillarBasePoints;
 	private List<Point> transformedPillarBasePoints;
-	private List<SteakoutCoords> controlledCoords;
+	private List<SteakoutCoords> controlledCoords = new ArrayList<>();
 	private double displayerCenterX;
 	private double displayerCenterY;
 	private Point directionDisplayerPoint;

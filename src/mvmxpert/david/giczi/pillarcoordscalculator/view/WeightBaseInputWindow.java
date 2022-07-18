@@ -23,7 +23,7 @@ import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalcul
 
 public class WeightBaseInputWindow {
 
-	private JFrame homeFrame;
+	public JFrame inputFrameForWeightBase;
 	private Color color = new Color(112,128,144);
 	private Font font1 = new Font("Arial", Font.PLAIN, 16);
 	private Font font2 = new Font("Arial", Font.BOLD, 13);
@@ -49,18 +49,18 @@ public class WeightBaseInputWindow {
 	
 	public WeightBaseInputWindow(String projectName) {
 	
-		homeFrame = new JFrame(projectName);
-		homeFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		homeFrame.setSize(400, 800);
-		homeFrame.setLocationRelativeTo(null);
-		homeFrame.setLocation((int) (homeFrame.getLocation().getX() - 100), (int) homeFrame.getLocation().getY());
-		homeFrame.setLayout(new FlowLayout());
+		inputFrameForWeightBase = new JFrame(projectName);
+		inputFrameForWeightBase.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		inputFrameForWeightBase.setSize(400, 800);
+		inputFrameForWeightBase.setLocationRelativeTo(null);
+		inputFrameForWeightBase.setLocation((int) (inputFrameForWeightBase.getLocation().getX() - 100), (int) inputFrameForWeightBase.getLocation().getY());
+		inputFrameForWeightBase.setLayout(new FlowLayout());
 		setPillarPointsData();
 		setPillarSizeData();
 		setOutputData();
 		addOkButton();
-		homeFrame.setResizable(false);
-		homeFrame.setVisible(true);
+		inputFrameForWeightBase.setResizable(false);
+		inputFrameForWeightBase.setVisible(true);
 	}
 	
 	private void setPillarPointsData() {
@@ -91,20 +91,20 @@ public class WeightBaseInputWindow {
 		centerYText.setFont(font2);
 		panel.add(centerYText);
 		panel.add(Box.createHorizontalStrut(30));
-		y_centerField = new JTextField(15);
-		y_centerField.setFont(font2);
-		y_centerField.setForeground(color);
-		panel.add(y_centerField);
+		x_centerField = new JTextField(15);
+		x_centerField.setFont(font2);
+		x_centerField.setForeground(color);
+		panel.add(x_centerField);
 		panel.add(new JLabel("m"));
 		
 		JLabel centerXText = new JLabel("X koordináta:");
 		centerXText.setFont(font2);
 		panel.add(centerXText);
 		panel.add(Box.createHorizontalStrut(30));
-		x_centerField = new JTextField(15);
-		x_centerField.setFont(font2);
-		x_centerField.setForeground(color);
-		panel.add(x_centerField);
+		y_centerField = new JTextField(15);
+		y_centerField.setFont(font2);
+		y_centerField.setForeground(color);
+		panel.add(y_centerField);
 		panel.add(new JLabel("m"));
 		
 		panel.add(Box.createVerticalStrut(30));
@@ -126,23 +126,23 @@ public class WeightBaseInputWindow {
 		directionYText.setFont(font2);
 		panel.add(directionYText);
 		panel.add(Box.createHorizontalStrut(30));
-		y_directionField = new JTextField(15);
-		y_directionField.setFont(font2);
-		y_directionField.setForeground(color);
-		panel.add(y_directionField);
-		panel.add(new JLabel("m"));
-		
-		JLabel directionXText = new JLabel("X koordináta:");
-		directionXText.setFont(font2);
-		panel.add(directionXText);
-		panel.add(Box.createHorizontalStrut(30));
 		x_directionField = new JTextField(15);
 		x_directionField.setFont(font2);
 		x_directionField.setForeground(color);
 		panel.add(x_directionField);
 		panel.add(new JLabel("m"));
 		
-		homeFrame.add(panel);
+		JLabel directionXText = new JLabel("X koordináta:");
+		directionXText.setFont(font2);
+		panel.add(directionXText);
+		panel.add(Box.createHorizontalStrut(30));
+		y_directionField = new JTextField(15);
+		y_directionField.setFont(font2);
+		y_directionField.setForeground(color);
+		panel.add(y_directionField);
+		panel.add(new JLabel("m"));
+		
+		inputFrameForWeightBase.add(panel);
 
 	}
 	
@@ -241,7 +241,7 @@ public class WeightBaseInputWindow {
 		panel.add(rotateAngularSecField);
 		panel.add(new JLabel("mperc"));
 		
-		homeFrame.add(panel);
+		inputFrameForWeightBase.add(panel);
 	}
 	
 	
@@ -320,7 +320,7 @@ public class WeightBaseInputWindow {
 			}
 		});
 		panel.add(all);
-		homeFrame.add(panel);
+		inputFrameForWeightBase.add(panel);
 	}
 	
 	private void addOkButton() {
@@ -337,7 +337,7 @@ public class WeightBaseInputWindow {
 			}
 		});
 		panel.add(ok);
-		homeFrame.add(panel);
+		inputFrameForWeightBase.add(panel);
 	}
 	
 }

@@ -11,11 +11,12 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+
+import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalculatorController;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 
 public class FileProcess {
 	
-	public static String projectName;
 	public static String FOLDER_PATH;
 	private static String FILE_PATH;
 	
@@ -26,7 +27,7 @@ public class FileProcess {
 			return;
 		}
 
-		File file = new File(FOLDER_PATH + "/" + projectName + "_KML.txt");
+		File file = new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + "_KML.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -46,7 +47,7 @@ public class FileProcess {
 			return;
 		}
 		
-		File file = new File(FOLDER_PATH + "/" + projectName + "_RTK.txt");
+		File file = new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + "_RTK.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -68,7 +69,7 @@ public class FileProcess {
 			return;
 		}
 		
-		File file = new File(FOLDER_PATH + "/" + projectName + "_TPS.txt");
+		File file = new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + "_TPS.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -84,13 +85,13 @@ public class FileProcess {
 		}
 	}
 	
-	public static void saveDataForMS(List<Point> points) {
+	public static void saveDataForMS(List<Point> points, Point directionPoint) {
 		
 		if(FOLDER_PATH == null) {
 			return;
 		}
 		
-		File file = new File(FOLDER_PATH + "/" + projectName + "_MS.txt");
+		File file = new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + "_MS.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -99,7 +100,8 @@ public class FileProcess {
 				writer.write(point.writePointForMS());
 				writer.newLine();
 			}
-					
+			writer.write(directionPoint.writePointForMS());
+			
 		} catch (IOException e) {
 			System.out.println( "\'"+ file.getName() + "\' file cannot be created.");
 			e.printStackTrace();
@@ -112,7 +114,7 @@ public class FileProcess {
 			return;
 		}
 		
-		File file = new File(FOLDER_PATH + "/" + projectName + "_kit.txt");
+		File file = new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + "_kit.txt");
 		
 		try(BufferedWriter writer = new BufferedWriter(
 				new FileWriter(file, true))) {
@@ -178,7 +180,134 @@ public class FileProcess {
 				File selectedFile = jfc.getSelectedFile();
 				FILE_PATH = selectedFile.getAbsolutePath();
 		}
-			
-	
 	}
+	
+	public static void saveProjectFileForPlatetBase
+	(String centerID, double centerX, double centerY, 
+	 String directionID, double directionX,  double directionY,
+	 double horizontalSizeOfHole, double verticalSizeOfHole,
+	 double horizontalDistanceFromHole, double verticalDistanceFromHole,
+	 double rotationAngle, double rotationSec, double rotationMin) {
+		
+		File projectFile = new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + ".pcc");
+		
+		try(BufferedWriter writer = new BufferedWriter(
+				new FileWriter(projectFile))) {
+			
+				writer.write("#PlateBase");
+				writer.newLine();
+				writer.write(centerID);
+				writer.newLine();
+				writer.write(String.valueOf(centerX));
+				writer.newLine();
+				writer.write(String.valueOf(centerY));
+				writer.newLine();
+				writer.write(directionID);
+				writer.newLine();
+				writer.write(String.valueOf(directionX));
+				writer.newLine();
+				writer.write(String.valueOf(directionY));
+				writer.newLine();
+				writer.write(String.valueOf(horizontalSizeOfHole));
+				writer.newLine();
+				writer.write(String.valueOf(verticalSizeOfHole));
+				writer.newLine();
+				writer.write(String.valueOf(horizontalDistanceFromHole));
+				writer.newLine();
+				writer.write(String.valueOf(verticalDistanceFromHole));
+				writer.newLine();
+				writer.write(String.valueOf(rotationAngle));
+				writer.newLine();
+				writer.write(String.valueOf(rotationMin));
+				writer.newLine();
+				writer.write(String.valueOf(rotationSec));
+				
+		} catch (IOException e) {
+			System.out.println( "\'"+ projectFile.getName() + "\' file cannot be created.");
+			e.printStackTrace();
+		}
+			
+	}
+	
+	public static void saveProjectFileForWeightBase(String centerID, double centerX, double centerY, 
+			 String directionID, double directionX,  double directionY,
+			 double distanceOnTheAxis, 
+			 double horizontalDistanceBetweenPillarLegs,
+			 double verticalDistanceBetweenPillarLegs, 
+			 double horizontalSizeOfHoleOfPillarLeg,
+			 double verticalSizeOfHoleOfPillarLeg,
+			 double rotationAngle, double rotationSec, double rotationMin) {
+		
+		File projectFile = new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + ".pcc");
+		
+		try(BufferedWriter writer = new BufferedWriter(
+				new FileWriter(projectFile))) {
+			
+				writer.write("#WeightBase");
+				writer.newLine();
+				writer.write(centerID);
+				writer.newLine();
+				writer.write(String.valueOf(centerX));
+				writer.newLine();
+				writer.write(String.valueOf(centerY));
+				writer.newLine();
+				writer.write(directionID);
+				writer.newLine();
+				writer.write(String.valueOf(directionX));
+				writer.newLine();
+				writer.write(String.valueOf(directionY));
+				writer.newLine();
+				writer.write(String.valueOf(distanceOnTheAxis));
+				writer.newLine();
+				writer.write(String.valueOf(horizontalDistanceBetweenPillarLegs));
+				writer.newLine();
+				writer.write(String.valueOf(verticalDistanceBetweenPillarLegs));
+				writer.newLine();
+				writer.write(String.valueOf(horizontalSizeOfHoleOfPillarLeg));
+				writer.newLine();
+				writer.write(String.valueOf(verticalSizeOfHoleOfPillarLeg));
+				writer.newLine();
+				writer.write(String.valueOf(rotationAngle));
+				writer.newLine();
+				writer.write(String.valueOf(rotationMin));
+				writer.newLine();
+				writer.write(String.valueOf(rotationSec));
+				
+		} catch (IOException e) {
+			System.out.println( "\'"+ projectFile.getName() + "\' file cannot be created.");
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean isProjectFileExist() {
+		return new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + ".pcc").exists();
+	}
+	
+	public static List<String> getProjectFileData(){
+		
+		List<String> projectData = new ArrayList<>();
+		
+		if( FOLDER_PATH == null ) {
+			return projectData;
+		}
+		else if( isProjectFileExist() ) {
+			
+		File projectFile = new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + ".pcc");
+				
+		try(BufferedReader reader = new BufferedReader(new FileReader(projectFile))){
+			String row = reader.readLine();
+			while(row != null) { 
+			projectData.add(row);
+			row = reader.readLine();
+			}
+			
+		} catch (IOException e) {
+			System.out.println( "\'"+ projectFile.getName() + "\' file not found.");
+			e.printStackTrace();
+		}
+	}	
+		return projectData;
+	}
+	
+	
 }
