@@ -50,7 +50,9 @@ public class PlateBaseInputWindow {
 		inputFrameForPlateBase.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		inputFrameForPlateBase.setSize(400, 800);
 		inputFrameForPlateBase.setLocationRelativeTo(null);
-		inputFrameForPlateBase.setLocation((int) (inputFrameForPlateBase.getLocation().getX() - 100), (int) inputFrameForPlateBase.getLocation().getY());
+		inputFrameForPlateBase.setLocation(
+				(int) (inputFrameForPlateBase.getLocation().getX() - 100), 
+				(int) inputFrameForPlateBase.getLocation().getY());
 		inputFrameForPlateBase.setLayout(new FlowLayout());
 		setPillarPointsData();
 		setPillarSizeData();

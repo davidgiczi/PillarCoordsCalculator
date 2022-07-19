@@ -106,28 +106,28 @@ public class PillarCoordsCalculatorController {
 		double rotationSec = InputDataValidator.isValidAngleValue(plateBaseInputWindow.rotateAngularSecField.getText());
 		plateBaseCoordsCalculator.setAngularSecondValueBetweenMainPath(rotationSec);
 		plateBaseCoordsCalculator.calculatePillarPoints();
-		
 		if( FileProcess.isProjectFileExist() ) {
 			
 			if( getWarningMessage("\"" + PillarCoordsCalculatorController.PROJECT_NAME + ".pcc\"", 
 						"Létezõ " + getBaseType() + " projekt fájl, biztos, hogy felülírod?" ) == 2 ) {
 				setProjectName();
 		}
-			FileProcess.saveProjectFileForPlatetBase
+			createProjectFileForPlateBase(
+					centerID, centerX, centerY, 
+					directionID, directionX, directionY, 
+					horizontalSizeOfHole, verticalSizeOfHole,
+					horizontalDistanceFromHole, verticalDistanceFromHole, 
+					rotationAngle, rotationSec, rotationMin);
+		}
+	else {
+			createProjectFileForPlateBase
 			(centerID, centerX, centerY, 
 			 directionID, directionX, directionY, 
-			 horizontalSizeOfHole, verticalSizeOfHole, 
+			 horizontalSizeOfHole, verticalSizeOfHole,
 			 horizontalDistanceFromHole, verticalDistanceFromHole, 
 			 rotationAngle, rotationSec, rotationMin);
-			 saveCoordFileForPlateBase();
-			 plateBaseInputWindow.inputFrameForPlateBase.setVisible(false);
-			 new PlateBaseDisplayer(plateBaseCoordsCalculator.getPillarPoints(), 
-					   plateBaseCoordsCalculator.getAxisDirectionPoint(),
-					   plateBaseCoordsCalculator.getRadRotation(),
-					   PillarCoordsCalculatorController.PROJECT_NAME);
-		
 	}
- 
+		homeWindow.controlSteakutMenu.setEnabled(true);	
 	} catch (NumberFormatException e) {
 		getInfoMessage("Bemeneti adatok megadása",
 				"Minden üres adatmezõ kitöltése szükséges.");
@@ -182,31 +182,36 @@ public class PillarCoordsCalculatorController {
 		weightBaseCoordsCalculator.setAngularSecondValueBetweenMainPath(rotationSec);
 		weightBaseCoordsCalculator.calculatePillarPoints();
 		
-		if( FileProcess.isProjectFileExist()) { 
+		if( FileProcess.isProjectFileExist() ) { 
 		
 			if(getWarningMessage("\"" + PillarCoordsCalculatorController.PROJECT_NAME + ".pcc\"", 
 						"Létezõ " + getBaseType() + " projekt fájl, biztos, hogy felülírod?" ) == 2 ) {
 				setProjectName();
 		}
 			
-			FileProcess.saveProjectFileForWeightBase
+			createProjectFileForWeightBase
 			(centerID, centerX, centerY, 
-			 directionID, directionX, directionY, 
+			 directionID, directionX, directionY,
 			 distanceOnTheAxis, 
 			 horizontalDistanceBetweenPillarLegs, 
 			 verticalDistanceBetweenPillarLegs, 
 			 horizontalSizeOfHoleOfPillarLeg, 
 			 verticalSizeOfHoleOfPillarLeg, 
 			 rotationAngle, rotationSec, rotationMin);
-			 saveCoordFileForWeightBase();
-			 weightBaseInputWindow.inputFrameForWeightBase.setVisible(false);
-			 new WeightBaseDisplayer(weightBaseCoordsCalculator.getPillarPoints(), 
-					   weightBaseCoordsCalculator.getAxisDirectionPoint(),
-					   weightBaseCoordsCalculator.getRadRotation(),
-					   PillarCoordsCalculatorController.PROJECT_NAME);
 			
 	}
-	 	 
+		else {
+			createProjectFileForWeightBase
+			(centerID, centerX, centerY, 
+			 directionID, directionX, directionY,
+			 distanceOnTheAxis, 
+			 horizontalDistanceBetweenPillarLegs, 
+			 verticalDistanceBetweenPillarLegs, 
+			 horizontalSizeOfHoleOfPillarLeg, 
+			 verticalSizeOfHoleOfPillarLeg, 
+			 rotationAngle, rotationSec, rotationMin);
+		}
+		homeWindow.controlSteakutMenu.setEnabled(true);
 	} catch (NumberFormatException e) {
 		getInfoMessage("Bemeneti adatok megadása",
 				"Minden üres adatmezõ kitöltése szükséges.");
@@ -226,6 +231,54 @@ public class PillarCoordsCalculatorController {
 		String baseType = "#WeightBase".equals(FileProcess.getProjectFileData().get(0)) ? "súlyalap" : 
 			"#PlateBase".equals(FileProcess.getProjectFileData().get(0)) ? "lemezalap" : "";
 		return baseType;
+	}
+	
+	private static void createProjectFileForPlateBase(
+		String centerID, double centerX, double centerY, 
+		String directionID, double directionX,  double directionY,
+		double horizontalSizeOfHole, double verticalSizeOfHole,
+		double horizontalDistanceFromHole, double verticalDistanceFromHole,
+		double rotationAngle, double rotationSec, double rotationMin) {
+		
+		FileProcess.saveProjectFileForPlatetBase
+		(centerID, centerX, centerY, 
+		 directionID, directionX, directionY, 
+		 horizontalSizeOfHole, verticalSizeOfHole, 
+		 horizontalDistanceFromHole, verticalDistanceFromHole, 
+		 rotationAngle, rotationSec, rotationMin);
+		 saveCoordFileForPlateBase();
+		 plateBaseInputWindow.inputFrameForPlateBase.setVisible(false);
+		 new PlateBaseDisplayer(plateBaseCoordsCalculator.getPillarPoints(), 
+				   plateBaseCoordsCalculator.getAxisDirectionPoint(),
+				   plateBaseCoordsCalculator.getRadRotation(),
+				   PillarCoordsCalculatorController.PROJECT_NAME);
+	}
+	
+	private static void createProjectFileForWeightBase
+		(String centerID, double centerX, double centerY, 
+		 String directionID, double directionX,  double directionY,
+		 double distanceOnTheAxis, 
+		 double horizontalDistanceBetweenPillarLegs,
+		 double verticalDistanceBetweenPillarLegs, 
+		 double horizontalSizeOfHoleOfPillarLeg,
+		 double verticalSizeOfHoleOfPillarLeg,
+		 double rotationAngle, double rotationSec, double rotationMin) {
+		
+		FileProcess.saveProjectFileForWeightBase
+		(centerID, centerX, centerY, 
+		 directionID, directionX, directionY, 
+		 distanceOnTheAxis, 
+		 horizontalDistanceBetweenPillarLegs, 
+		 verticalDistanceBetweenPillarLegs, 
+		 horizontalSizeOfHoleOfPillarLeg, 
+		 verticalSizeOfHoleOfPillarLeg, 
+		 rotationAngle, rotationSec, rotationMin);
+		 saveCoordFileForWeightBase();
+		 weightBaseInputWindow.inputFrameForWeightBase.setVisible(false);
+		 new WeightBaseDisplayer(weightBaseCoordsCalculator.getPillarPoints(), 
+				   weightBaseCoordsCalculator.getAxisDirectionPoint(),
+				   weightBaseCoordsCalculator.getRadRotation(),
+				   PillarCoordsCalculatorController.PROJECT_NAME);
 	}
 	
 	private static void saveCoordFileForPlateBase() {
@@ -280,7 +333,7 @@ public class PillarCoordsCalculatorController {
 		
 		List<String> projectFileData = FileProcess.getProjectFileData();
 	
-		if( !projectFileData.isEmpty() && "#PlateBase".equals(projectFileData.get(0)) ) {
+		if( plateBaseInputWindow !=null && !projectFileData.isEmpty() && "#PlateBase".equals(projectFileData.get(0)) ) {
 			
 			plateBaseInputWindow.centerIdField.setText(projectFileData.get(1));
 			plateBaseInputWindow.x_centerField.setText(projectFileData.get(2));
@@ -300,7 +353,7 @@ public class PillarCoordsCalculatorController {
 			.setText(projectFileData.get(13).substring(0, projectFileData.get(13).indexOf('.')));
 		
 		}
-		else if( !projectFileData.isEmpty() && "#WeightBase".equals(projectFileData.get(0)) ) {
+		else if(weightBaseInputWindow !=null && !projectFileData.isEmpty() && "#WeightBase".equals(projectFileData.get(0)) ) {
 			
 			weightBaseInputWindow.centerIdField.setText(projectFileData.get(1));
 			weightBaseInputWindow.x_centerField.setText(projectFileData.get(2));

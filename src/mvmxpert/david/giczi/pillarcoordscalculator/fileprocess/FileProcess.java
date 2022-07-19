@@ -5,8 +5,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -18,7 +20,8 @@ import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 public class FileProcess {
 	
 	public static String FOLDER_PATH;
-	private static String FILE_PATH;
+	public static String STK_FILE_PATH;
+	public static String STK_FILE_NAME;
 	
 		
 	public static void saveDataForKML(Point pillarCenter) {
@@ -133,10 +136,10 @@ public class FileProcess {
 		
 		List<String> pointData = new ArrayList<>();
 		
-		if(FILE_PATH == null) {
+		if(STK_FILE_PATH == null) {
 			return pointData;
 		}
-		File file = new File(FILE_PATH);
+		File file = new File(STK_FILE_PATH + "/" + STK_FILE_NAME);
 		
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			
@@ -157,7 +160,6 @@ public class FileProcess {
 	public static void setFolder() {
 		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		jfc.setDialogTitle("Válassz mentési mappát a projektnek.");
-		jfc.setAcceptAllFileFilterUsed(false);
 		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnValue = jfc.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -178,7 +180,8 @@ public class FileProcess {
 			int returnValue = jfc.showOpenDialog(null);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = jfc.getSelectedFile();
-				FILE_PATH = selectedFile.getAbsolutePath();
+				STK_FILE_PATH = selectedFile.getParent();
+				STK_FILE_NAME = selectedFile.getName();
 		}
 	}
 	
@@ -280,7 +283,16 @@ public class FileProcess {
 	}
 	
 	public static boolean isProjectFileExist() {
-		return new File(FOLDER_PATH + "/" + PillarCoordsCalculatorController.PROJECT_NAME + ".pcc").exists();
+		
+		String[] pcc = new File(FOLDER_PATH).list(new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.toLowerCase().endsWith(".pcc");
+			}
+		});
+
+		return Arrays.asList(pcc).contains(PillarCoordsCalculatorController.PROJECT_NAME + ".pcc");
 	}
 	
 	public static List<String> getProjectFileData(){
