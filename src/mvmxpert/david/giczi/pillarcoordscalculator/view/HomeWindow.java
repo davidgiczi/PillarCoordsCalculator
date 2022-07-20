@@ -13,13 +13,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalculatorController;
 import mvmxpert.david.giczi.pillarcoordscalculator.listeners.CreateProjectListener;
+import mvmxpert.david.giczi.pillarcoordscalculator.listeners.CreateSteakoutWindowListener;
 
 public class HomeWindow {
 
 	private JFrame homeFrame;
 	private Color textColor = new Color(112,128,144);
 	public JMenu steakoutMenu;
-	public JMenu controlSteakutMenu;
+	public JMenu controlSteakoutMenu;
 	
 	public HomeWindow() {
 		
@@ -37,15 +38,16 @@ public class HomeWindow {
 		JMenu menu1 = new JMenu("Projekt beolvasása/létrehozása");
 		menu1.setForeground(textColor);
 		menu1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		menu1.addMouseListener(new CreateProjectListener());
-		steakoutMenu = new JMenu("Kitûzési méretek számítása");
+		menu1.addMenuListener(new CreateProjectListener());
+		steakoutMenu = new JMenu("Alap adatainak megadása");
 		steakoutMenu.setForeground(textColor);
 		steakoutMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		steakoutMenu.setEnabled(false);
-		controlSteakutMenu = new JMenu("Kitûzött pontok ellenõrzése");
-		controlSteakutMenu.setForeground(textColor);
-		controlSteakutMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		controlSteakutMenu.setEnabled(false);
+		controlSteakoutMenu = new JMenu("Kitûzött pontok ellenõrzése");
+		controlSteakoutMenu.setForeground(textColor);
+		controlSteakoutMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		controlSteakoutMenu.addMenuListener(new CreateSteakoutWindowListener());
+		controlSteakoutMenu.setEnabled(false);
 		JMenuBar menuBar = new JMenuBar();
 		JMenuItem item21 = new JMenuItem("Súlyalap pontjainak számítása");
 		item21.setForeground(textColor);
@@ -71,7 +73,7 @@ public class HomeWindow {
 		menuBar.add(steakoutMenu);
 		steakoutMenu.add(item21);
 		steakoutMenu.add(item22);
-		menuBar.add(controlSteakutMenu);
+		menuBar.add(controlSteakoutMenu);
 		homeFrame.setJMenuBar(menuBar);
 	}
 	

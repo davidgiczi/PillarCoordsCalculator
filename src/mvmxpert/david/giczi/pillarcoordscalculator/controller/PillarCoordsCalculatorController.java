@@ -12,6 +12,7 @@ import mvmxpert.david.giczi.pillarcoordscalculator.fileprocess.FileProcess;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.HomeWindow;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.PlateBaseDisplayer;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.PlateBaseInputWindow;
+import mvmxpert.david.giczi.pillarcoordscalculator.view.SteakoutControlWindow;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.WeightBaseDisplayer;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.WeightBaseInputWindow;
 
@@ -24,6 +25,7 @@ public class PillarCoordsCalculatorController {
 	private static HomeWindow homeWindow;
 	private static WeightBaseInputWindow weightBaseInputWindow;
 	private static PlateBaseInputWindow plateBaseInputWindow;
+	private static SteakoutControlWindow steakoutControlWindow;
 	
 	
 	public PillarCoordsCalculatorController() {
@@ -45,6 +47,7 @@ public class PillarCoordsCalculatorController {
 			if( FileProcess.isProjectFileExist() ) {
 				getInfoMessage("\"" + PillarCoordsCalculatorController.PROJECT_NAME + "\"" + " projekt",
 						"Létezõ " + getBaseType() +" projekt.");
+				homeWindow.controlSteakoutMenu.setEnabled(true);
 			}
 		}
 	}
@@ -55,13 +58,32 @@ public class PillarCoordsCalculatorController {
 	}
 	
 	public static void getPlateBaseInputWindow() {
+		if(plateBaseInputWindow == null) {
 		plateBaseInputWindow = new PlateBaseInputWindow(PillarCoordsCalculatorController.PROJECT_NAME);
 		setProjectFileData();
+		}
+		else {
+		plateBaseInputWindow.inputFrameForPlateBase.setVisible(true);	
+		}
 	}
 	
 	public static void getWeightBaseInputWindow() {
+		if(weightBaseInputWindow == null) {
 		weightBaseInputWindow = new WeightBaseInputWindow(PillarCoordsCalculatorController.PROJECT_NAME);
 		setProjectFileData();
+		}
+		else {
+		weightBaseInputWindow.inputFrameForWeightBase.setVisible(true);
+		}
+	}
+	
+	public static void getSteakoutControlWindow() {
+		if(steakoutControlWindow == null) {
+		steakoutControlWindow = new SteakoutControlWindow(PROJECT_NAME);
+		}
+		else {
+			steakoutControlWindow.steakoutControlFrame.setVisible(true);
+		}
 	}
 	
 	public static void clickButtonOnPlateBaseInputWindow() {
@@ -127,7 +149,7 @@ public class PillarCoordsCalculatorController {
 			 horizontalDistanceFromHole, verticalDistanceFromHole, 
 			 rotationAngle, rotationSec, rotationMin);
 	}
-		homeWindow.controlSteakutMenu.setEnabled(true);	
+		homeWindow.controlSteakoutMenu.setEnabled(true);	
 	} catch (NumberFormatException e) {
 		getInfoMessage("Bemeneti adatok megadása",
 				"Minden üres adatmezõ kitöltése szükséges.");
@@ -211,7 +233,7 @@ public class PillarCoordsCalculatorController {
 			 verticalSizeOfHoleOfPillarLeg, 
 			 rotationAngle, rotationSec, rotationMin);
 		}
-		homeWindow.controlSteakutMenu.setEnabled(true);
+		homeWindow.controlSteakoutMenu.setEnabled(true);
 	} catch (NumberFormatException e) {
 		getInfoMessage("Bemeneti adatok megadása",
 				"Minden üres adatmezõ kitöltése szükséges.");

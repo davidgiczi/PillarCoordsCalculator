@@ -5,11 +5,11 @@ import javax.swing.event.MenuListener;
 
 import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalculatorController;
 
-public class CreateProjectListener implements MenuListener {
+public class CreateSteakoutWindowListener implements MenuListener {
 
 	@Override
 	public void menuSelected(MenuEvent e) {
-		PillarCoordsCalculatorController.setProjectName();
+		PillarCoordsCalculatorController.getSteakoutControlWindow();
 		
 	}
 
@@ -26,6 +26,5 @@ public class CreateProjectListener implements MenuListener {
 	}
 
 	
-
 
 }
