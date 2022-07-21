@@ -20,16 +20,23 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalculatorController;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.InputDataValidator;
 import mvmxpert.david.giczi.pillarcoordscalculator.fileprocess.FileProcess;
 
 public class SteakoutControlWindow {
 
 	public JFrame steakoutControlFrame;
+	public JTextField stkFileNameField;
+	public JTextField stkFilePlaceField;
+	public String prePostFixSelectedOption = "pontszám";
+	public String prePostFixValue;
+	public String delimiterSelectedValue = ",";
+	public JRadioButton yesPrintRadioBtn;
+	public JRadioButton noPrintRadioBtn;
 	private Color color = new Color(112,128,144);
 	private Font font1 = new Font("Arial", Font.PLAIN, 16);
 	private Font font2 = new Font("Arial", Font.BOLD, 13);
-	private String prePostFixVale;
 	
 	
 	public SteakoutControlWindow(String projectName) {
@@ -60,8 +67,8 @@ public class SteakoutControlWindow {
 				.createTitledBorder(BorderFactory.createEtchedBorder(),
 						"Kitûzési fájl nevének/helyének megadása", TitledBorder.CENTER, TitledBorder.TOP, font1, color));
 		panel.add(Box.createHorizontalStrut(130));
-		JTextField stkFileNameField = new JTextField(32);
-		JTextField stkFilePlaceField = new JTextField(32);
+		stkFileNameField = new JTextField(32);
+		stkFilePlaceField = new JTextField(32);
 		JButton browse = new JButton("Tallózás");
 		browse.setFont(font2);
 		browse.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -70,7 +77,8 @@ public class SteakoutControlWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				stkFileNameField.setText(null);
+				stkFilePlaceField.setText(null);
 				FileProcess.setSteakoutFile();
 				stkFileNameField.setText(FileProcess.STK_FILE_NAME);
 				stkFilePlaceField.setText(FileProcess.STK_FILE_PATH);
@@ -119,26 +127,25 @@ public class SteakoutControlWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String selectedValue = prePostFixCombo.getSelectedItem().toString();
+				prePostFixValueText.setText(null);
+				prePostFixValueField.setText(null);
+				prePostFixSelectedOption = prePostFixCombo.getSelectedItem().toString();
 				
-				if( !"pontszám".equals(selectedValue) ) {
-				prePostFixVale = 
-						JOptionPane.showInputDialog(null, "Add meg az " + selectedValue + " értékét:",
-								"Az " + selectedValue +  " értékének megadása", JOptionPane.DEFAULT_OPTION);
+				if( !"pontszám".equals(prePostFixSelectedOption) ) {
+				prePostFixValue = 
+						JOptionPane.showInputDialog(null, "Add meg az " + prePostFixSelectedOption + " értékét:",
+								"Az " + prePostFixSelectedOption +  " értékének megadása", JOptionPane.DEFAULT_OPTION);
 				
-					if(prePostFixVale != null && InputDataValidator.isValidPrePostFixValue(prePostFixVale)) {
-					prePostFixValueText.setText("A pontszám " + selectedValue + " értéke:");
-					prePostFixValueField.setText(prePostFixVale);
+					if(prePostFixValue != null && InputDataValidator.isValidPrePostFixValue(prePostFixValue)) {
+					prePostFixValueText.setText("A pontszám " + prePostFixSelectedOption + " értéke:");
+					prePostFixValueField.setText(prePostFixValue);
 					}
-					else if(prePostFixVale != null && !InputDataValidator.isValidPrePostFixValue(prePostFixVale)) {
-					JOptionPane.showMessageDialog(null, "Az " + selectedValue + " értéke legalább egy, nem üres karakter lehet." , 
-							"Az " + selectedValue  + " értéknek megadása", JOptionPane.INFORMATION_MESSAGE);
+					else if(prePostFixValue != null && !InputDataValidator.isValidPrePostFixValue(prePostFixValue)) {
+					JOptionPane.showMessageDialog(null, "Az " + prePostFixSelectedOption + " értéke legalább egy, nem üres karakter lehet." , 
+							"Az " + prePostFixSelectedOption  + " értéknek megadása", JOptionPane.INFORMATION_MESSAGE);
 					}
 			}
-				else {
-					prePostFixValueText.setText(null);
-					prePostFixValueField.setText(null);
-				}
+				
 		}
 		});
 		panel.add(prePostFixCombo);
@@ -148,14 +155,23 @@ public class SteakoutControlWindow {
 		prePostFixValueField.setForeground(color);
 		prePostFixValueField.setEditable(false);
 		panel.add(prePostFixValueField);
-		JLabel demiliterText = new JLabel("A kitûzési fájlban lévõ elválasztó karakter:");
-		demiliterText.setFont(font2);
-		panel.add(demiliterText);
+		JLabel delimiterText = new JLabel("A kitûzési fájlban lévõ elválasztó karakter:");
+		delimiterText.setFont(font2);
+		panel.add(delimiterText);
 		panel.add(Box.createVerticalStrut(80));
-		String[] demiliterValues = {",", ";", "space"};
-		JComboBox<String> demiliterCombo = new JComboBox<>(demiliterValues);
+		String[] delimiterValues = {",", ";", "space"};
+		JComboBox<String> delimiterCombo = new JComboBox<>(delimiterValues);
+		delimiterCombo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				delimiterSelectedValue = delimiterCombo.getSelectedItem().toString();
+				
+			}
+		});
 		prePostFixCombo.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		panel.add(demiliterCombo);
+		panel.add(delimiterCombo);
 		
 		steakoutControlFrame.add(panel);
 	}
@@ -175,15 +191,14 @@ public class SteakoutControlWindow {
 		panel.add(saveFileLabel);
 		panel.add(Box.createHorizontalStrut(400));
 		ButtonGroup group = new ButtonGroup();
-		JRadioButton yes = new JRadioButton("Igen", true);
-		yes.setBackground(Color.WHITE);
-		panel.add(yes);
-		JRadioButton no = new JRadioButton("Nem");
-		no.setBackground(Color.WHITE);
-		group.add(yes);
-		group.add(no);
-		panel.add(no);
-		
+		yesPrintRadioBtn = new JRadioButton("Igen", true);
+		yesPrintRadioBtn.setBackground(Color.WHITE);
+		panel.add(yesPrintRadioBtn);
+		noPrintRadioBtn = new JRadioButton("Nem");
+		noPrintRadioBtn.setBackground(Color.WHITE);
+		group.add(yesPrintRadioBtn);
+		group.add(noPrintRadioBtn);
+		panel.add(noPrintRadioBtn);
 		steakoutControlFrame.add(panel);
 	}
 	
@@ -197,7 +212,7 @@ public class SteakoutControlWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				PillarCoordsCalculatorController.clickOkButtonAtStakeoutControlWindow();
 			}
 		});
 		panel.add(ok);

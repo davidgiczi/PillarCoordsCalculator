@@ -333,7 +333,7 @@ public class WeightBaseInputWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PillarCoordsCalculatorController.clickButtonOnWeightBaseInputWindow();
+				PillarCoordsCalculatorController.clickCountButtonAtWeightBaseInputWindow();
 			}
 		});
 		panel.add(ok);

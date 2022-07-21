@@ -224,15 +224,9 @@ public class PlateBaseDisplayer extends JFrame{
 	 		PolarPoint polarPoint = 
 	  	        		new PolarPoint(transformedPillarBasePoints.get(0), 300, 
 	  	        				azimuthAndDistance.calcAzimuth(), "baseLine");
-	 		if( rotation == 0) {
+	 		
 	 		g2d.drawString(directionDisplayerPoint.getPointID(), (float) (polarPoint.calcPolarPoint().getX_coord() - 80), 
 	 				(float) polarPoint.calcPolarPoint().getY_coord() + 50);
-	 		}
-	 		else {
-	 	  	 g2d.drawString(directionDisplayerPoint.getPointID(), (float) (polarPoint.calcPolarPoint().getX_coord() - 80), 
-		 				(float) (polarPoint.calcPolarPoint().getY_coord() + 50));
-	 		}
-	 		
 	 		g2d.setColor(Color.BLACK);
 	 		g2d.drawString("1m", (float) (displayerCenterX + 300), (float) (displayerCenterY + 290));
 	 		g2d.drawString("M= 1:200", (float) (displayerCenterX + 300), (float) (displayerCenterY + 350));

@@ -323,7 +323,7 @@ public class PlateBaseInputWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PillarCoordsCalculatorController.clickButtonOnPlateBaseInputWindow();
+				PillarCoordsCalculatorController.clickCountButtonAtPlateBaseInputWindow();
 			}
 		});
 		panel.add(ok);

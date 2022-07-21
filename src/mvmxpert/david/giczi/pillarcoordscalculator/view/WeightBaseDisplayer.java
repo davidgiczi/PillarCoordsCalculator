@@ -248,15 +248,9 @@ public class WeightBaseDisplayer extends JFrame {
  	  	    PolarPoint polarPoint = 
  	  	        		new PolarPoint(transformedPillarBasePoints.get(0), 300, 
  	  	        				azimuthAndDistance.calcAzimuth(), "baseLine");
-	 		if( rotation == 0) {
-	 			g2d.drawString(directionDisplayerPoint.getPointID(), (float) polarPoint.calcPolarPoint().getX_coord(),
+ 	  	    
+	 	g2d.drawString(directionDisplayerPoint.getPointID(), (float) polarPoint.calcPolarPoint().getX_coord(),
 	 					(float) (polarPoint.calcPolarPoint().getY_coord() + 50));
-	 		}
-	 		else {
-	 	  	    g2d.drawString(directionDisplayerPoint.getPointID(), (float) polarPoint.calcPolarPoint().getX_coord(), 
-	 	  		(float) (polarPoint.calcPolarPoint().getY_coord() + 50));
-	 		}
-			
 	 	g2d.setColor(Color.BLACK);
 		g2d.drawString("1m", (float) (displayerCenterX + 300), (float) (displayerCenterY + 290));
 		g2d.drawString("M= 1:200", (float) (displayerCenterX + 300), (float) (displayerCenterY + 260));
@@ -418,7 +412,7 @@ public class WeightBaseDisplayer extends JFrame {
 				x - verticalPath / 2 - 35, y - horizontalDistance / 2));
 		g2d.draw(new Line2D.Double(x - verticalPath / 2 - 45, y + horizontalDistance / 2,
 				x - verticalPath / 2 - 35, y + horizontalDistance / 2));
-	
+		drawMainPath(g2d, x, y);
 		DecimalFormat df = new DecimalFormat("###.###");
 		AzimuthAndDistance verticalHoleDistance = new AzimuthAndDistance(pillarBasePoints.get(9), pillarBasePoints.get(10));
 		AzimuthAndDistance verticalPathDistance =
@@ -431,8 +425,74 @@ public class WeightBaseDisplayer extends JFrame {
 				new AzimuthAndDistance(pillarBasePoints.get(5), pillarBasePoints.get(7));
 		double horizontalSize = horizontalPathDistance.calcDistance() - horizontalHoleDistance.calcDistance();
 		g2d.drawString(df.format(horizontalSize) + "m", (int) (x - verticalPath / 2) - 100, (int) y);
+	
 	}
-
+	
+	private void drawMainPath(Graphics2D g2d, double x, double y) {
+		g2d.setColor(Color.MAGENTA);
+		Point origin = new Point("origin", x, y);
+		double horizontalPath = 
+				new AzimuthAndDistance(transformedPillarBasePoints.get(5), transformedPillarBasePoints.get(7)).calcDistance();
+		if( rotation == 0) {
+	        PolarPoint polarPoint1 = new PolarPoint(origin, 100,
+	        		 0, "baseLine");
+	        PolarPoint polarPoint2 = new PolarPoint(polarPoint1.calcPolarPoint(), 30,
+	        		  3 * Math.PI / 4, "arrow");
+	        PolarPoint polarPoint3 = new PolarPoint(polarPoint1.calcPolarPoint(), 30,
+	        		- 3 * Math.PI / 4, "arrow");
+	        g2d.draw(new Line2D.Double(
+	        		x,
+	        		y + horizontalPath / 2, 
+    				polarPoint1.calcPolarPoint().getX_coord(), 
+    				polarPoint1.calcPolarPoint().getY_coord()));
+	        g2d.draw(new Line2D.Double(
+	        			polarPoint1.calcPolarPoint().getX_coord(),
+	        			polarPoint1.calcPolarPoint().getY_coord(),
+        				polarPoint2.calcPolarPoint().getX_coord(), 
+        				polarPoint2.calcPolarPoint().getY_coord()));
+	        g2d.draw(new Line2D.Double(
+	        			polarPoint1.calcPolarPoint().getX_coord(),
+	        			polarPoint1.calcPolarPoint().getY_coord(),
+        				polarPoint3.calcPolarPoint().getX_coord(), 
+        				polarPoint3.calcPolarPoint().getY_coord()));
+	        
+	        g2d.drawString(directionDisplayerPoint.getPointID(), 
+	        		(int) polarPoint1.calcPolarPoint().getX_coord(), (int) polarPoint1.calcPolarPoint().getY_coord() + 20);
+	  }
+	        else {
+	        	
+	        AzimuthAndDistance azimuthAndDistance = new AzimuthAndDistance(transformedPillarBasePoints.get(0), directionDisplayerPoint);
+	  	    PolarPoint polarPoint = 
+	  	        		new PolarPoint(origin, 300, 
+	  	        				azimuthAndDistance.calcAzimuth(), "baseLine");
+	  	    PolarPoint polarPoint1 = new PolarPoint(polarPoint.calcPolarPoint(), 30,
+	        		azimuthAndDistance.calcAzimuth() - 3 * Math.PI / 4, "arrow");
+	        PolarPoint polarPoint2 = new PolarPoint(polarPoint.calcPolarPoint(), 30,
+	        		azimuthAndDistance.calcAzimuth() + 3 * Math.PI / 4, "arrow");
+	  	    g2d.draw(new Line2D.Double(
+	  	    		x,
+	  	    		y,
+      				polarPoint.calcPolarPoint().getX_coord(), 
+      				polarPoint.calcPolarPoint().getY_coord()));
+	  	   g2d.draw(new Line2D.Double(
+	  			   polarPoint.calcPolarPoint().getX_coord(), 
+	  			   polarPoint.calcPolarPoint().getY_coord(),
+	  			   polarPoint1.calcPolarPoint().getX_coord(), 
+	  			   polarPoint1.calcPolarPoint().getY_coord()));
+	  	   g2d.draw(new Line2D.Double(
+	  			   polarPoint.calcPolarPoint().getX_coord(), 
+	  			   polarPoint.calcPolarPoint().getY_coord(),
+	  			   polarPoint2.calcPolarPoint().getX_coord(), 
+	  			   polarPoint2.calcPolarPoint().getY_coord()));
+	  	   
+	  	 g2d.drawString(directionDisplayerPoint.getPointID(),
+	        		(int) polarPoint1.calcPolarPoint().getX_coord(), (int) polarPoint1.calcPolarPoint().getY_coord() + 50);
+	        }
+		
+		
+		g2d.setColor(Color.BLACK);
+	}
+	
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);

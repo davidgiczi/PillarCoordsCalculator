@@ -8,6 +8,7 @@ import mvmxpert.david.giczi.pillarcoordscalculator.domain.PillarCoordsForPlateBa
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.PillarCoordsForWeightBase;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.Point;
 import mvmxpert.david.giczi.pillarcoordscalculator.domain.SteakoutControl;
+import mvmxpert.david.giczi.pillarcoordscalculator.enumerator.PointID;
 import mvmxpert.david.giczi.pillarcoordscalculator.fileprocess.FileProcess;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.HomeWindow;
 import mvmxpert.david.giczi.pillarcoordscalculator.view.PlateBaseDisplayer;
@@ -40,14 +41,13 @@ public class PillarCoordsCalculatorController {
 		if( projectName == null ) {
 		}
 		else if( InputDataValidator.isValidProjectName(projectName) ) {
-			PillarCoordsCalculatorController.PROJECT_NAME = projectName;
+			PROJECT_NAME = projectName;
 			FileProcess.setFolder();
 			if(FileProcess.FOLDER_PATH != null) {
 			homeWindow.steakoutMenu.setEnabled(true);
 			if( FileProcess.isProjectFileExist() ) {
-				getInfoMessage("\"" + PillarCoordsCalculatorController.PROJECT_NAME + "\"" + " projekt",
+				getInfoMessage("\"" + PROJECT_NAME + "\"" + " projekt",
 						"Létezõ " + getBaseType() +" projekt.");
-				homeWindow.controlSteakoutMenu.setEnabled(true);
 			}
 		}
 	}
@@ -59,7 +59,7 @@ public class PillarCoordsCalculatorController {
 	
 	public static void getPlateBaseInputWindow() {
 		if(plateBaseInputWindow == null) {
-		plateBaseInputWindow = new PlateBaseInputWindow(PillarCoordsCalculatorController.PROJECT_NAME);
+		plateBaseInputWindow = new PlateBaseInputWindow(PROJECT_NAME);
 		setProjectFileData();
 		}
 		else {
@@ -69,7 +69,7 @@ public class PillarCoordsCalculatorController {
 	
 	public static void getWeightBaseInputWindow() {
 		if(weightBaseInputWindow == null) {
-		weightBaseInputWindow = new WeightBaseInputWindow(PillarCoordsCalculatorController.PROJECT_NAME);
+		weightBaseInputWindow = new WeightBaseInputWindow(PROJECT_NAME);
 		setProjectFileData();
 		}
 		else {
@@ -86,7 +86,7 @@ public class PillarCoordsCalculatorController {
 		}
 	}
 	
-	public static void clickButtonOnPlateBaseInputWindow() {
+	public static void clickCountButtonAtPlateBaseInputWindow() {
 	
 		String centerID = plateBaseInputWindow.centerIdField.getText();
 		String directionID = plateBaseInputWindow.directionIdField.getText();
@@ -130,7 +130,7 @@ public class PillarCoordsCalculatorController {
 		plateBaseCoordsCalculator.calculatePillarPoints();
 		if( FileProcess.isProjectFileExist() ) {
 			
-			if( getWarningMessage("\"" + PillarCoordsCalculatorController.PROJECT_NAME + ".pcc\"", 
+			if( getWarningMessage("\"" + PROJECT_NAME + ".pcc\"", 
 						"Létezõ " + getBaseType() + " projekt fájl, biztos, hogy felülírod?" ) == 2 ) {
 				setProjectName();
 		}
@@ -149,7 +149,8 @@ public class PillarCoordsCalculatorController {
 			 horizontalDistanceFromHole, verticalDistanceFromHole, 
 			 rotationAngle, rotationSec, rotationMin);
 	}
-		homeWindow.controlSteakoutMenu.setEnabled(true);	
+		homeWindow.controlSteakoutMenu.setEnabled(true);
+		weightBaseCoordsCalculator = null;
 	} catch (NumberFormatException e) {
 		getInfoMessage("Bemeneti adatok megadása",
 				"Minden üres adatmezõ kitöltése szükséges.");
@@ -158,7 +159,7 @@ public class PillarCoordsCalculatorController {
 	}	
 }
 	
-	public static void clickButtonOnWeightBaseInputWindow() {
+	public static void clickCountButtonAtWeightBaseInputWindow() {
 		
 		String centerID = weightBaseInputWindow.centerIdField.getText();
 		String directionID = weightBaseInputWindow.directionIdField.getText();
@@ -206,7 +207,7 @@ public class PillarCoordsCalculatorController {
 		
 		if( FileProcess.isProjectFileExist() ) { 
 		
-			if(getWarningMessage("\"" + PillarCoordsCalculatorController.PROJECT_NAME + ".pcc\"", 
+			if(getWarningMessage("\"" + PROJECT_NAME + ".pcc\"", 
 						"Létezõ " + getBaseType() + " projekt fájl, biztos, hogy felülírod?" ) == 2 ) {
 				setProjectName();
 		}
@@ -234,6 +235,7 @@ public class PillarCoordsCalculatorController {
 			 rotationAngle, rotationSec, rotationMin);
 		}
 		homeWindow.controlSteakoutMenu.setEnabled(true);
+		plateBaseCoordsCalculator = null;
 	} catch (NumberFormatException e) {
 		getInfoMessage("Bemeneti adatok megadása",
 				"Minden üres adatmezõ kitöltése szükséges.");
@@ -273,7 +275,7 @@ public class PillarCoordsCalculatorController {
 		 new PlateBaseDisplayer(plateBaseCoordsCalculator.getPillarPoints(), 
 				   plateBaseCoordsCalculator.getAxisDirectionPoint(),
 				   plateBaseCoordsCalculator.getRadRotation(),
-				   PillarCoordsCalculatorController.PROJECT_NAME);
+				   PROJECT_NAME);
 	}
 	
 	private static void createProjectFileForWeightBase
@@ -300,7 +302,7 @@ public class PillarCoordsCalculatorController {
 		 new WeightBaseDisplayer(weightBaseCoordsCalculator.getPillarPoints(), 
 				   weightBaseCoordsCalculator.getAxisDirectionPoint(),
 				   weightBaseCoordsCalculator.getRadRotation(),
-				   PillarCoordsCalculatorController.PROJECT_NAME);
+				   PROJECT_NAME);
 	}
 	
 	private static void saveCoordFileForPlateBase() {
@@ -394,6 +396,78 @@ public class PillarCoordsCalculatorController {
 			.setText(projectFileData.get(13).substring(0, projectFileData.get(13).indexOf('.')));
 			weightBaseInputWindow.rotateAngularSecField
 			.setText(projectFileData.get(14).substring(0, projectFileData.get(14).indexOf('.')));
+		}
+	}
+	
+	public static void clickOkButtonAtStakeoutControlWindow() {
+		
+		if( steakoutControlWindow.stkFileNameField.getText().isEmpty() || 
+				steakoutControlWindow.stkFilePlaceField.getText().isEmpty()) {
+			getInfoMessage("Kitûzési fájl nevének/helyének megadása.", "Kitûzési fájl választása szükséges.");
+			return;
+		}
+		
+		String prePostFixSelectedOption = steakoutControlWindow.prePostFixSelectedOption;
+		String prePostFixValue = steakoutControlWindow.prePostFixValue;
+		
+		if( prePostFixValue != null && prePostFixValue.isEmpty() && "elõtag".equals(prePostFixSelectedOption)) {
+			getInfoMessage("Pontszám elõtag megadása.", "Pontszám elõtag értékének megadása szükséges.");
+			return;
+		}
+		else if(prePostFixValue != null && prePostFixValue.isEmpty() && "utótag".equals(prePostFixSelectedOption)) {
+			getInfoMessage("Pontszám utótag megadása.", "Pontszám utótag értékének megadása szükséges.");
+			return;
+		}
+		
+		String delimiter = steakoutControlWindow.delimiterSelectedValue;
+		
+		if( plateBaseCoordsCalculator != null) {
+			
+			steakoutControl = new SteakoutControl(plateBaseCoordsCalculator.getPillarPoints(), 
+					getPointID(prePostFixSelectedOption), prePostFixValue, delimiter);
+			
+			if( steakoutControlWindow.yesPrintRadioBtn.isSelected()) {
+				steakoutControl.controlSteakout(true);
+			}
+			else if ( steakoutControlWindow.noPrintRadioBtn.isSelected()) {
+				steakoutControl.controlSteakout(false);
+			}
+			
+		PlateBaseDisplayer plateBaseDisplayer =	new PlateBaseDisplayer
+					(plateBaseCoordsCalculator.getPillarPoints(), 
+					plateBaseCoordsCalculator.getAxisDirectionPoint(), 
+					plateBaseCoordsCalculator.getRadRotation(), PROJECT_NAME);
+		plateBaseDisplayer.setControlledCoords(steakoutControl.getControlledCoords());
+		}
+		else if( weightBaseCoordsCalculator != null) {
+			
+			steakoutControl = new SteakoutControl(weightBaseCoordsCalculator.getPillarPoints(), 
+					getPointID(prePostFixSelectedOption), prePostFixValue, delimiter);
+		
+			if( steakoutControlWindow.yesPrintRadioBtn.isSelected()) {
+				steakoutControl.controlSteakout(true);
+			}
+			else if ( steakoutControlWindow.noPrintRadioBtn.isSelected()) {
+				steakoutControl.controlSteakout(false);
+			}
+		WeightBaseDisplayer weightBaseDisplayer = new WeightBaseDisplayer(weightBaseCoordsCalculator.getPillarPoints(), 
+					weightBaseCoordsCalculator.getAxisDirectionPoint(), 
+					weightBaseCoordsCalculator.getRadRotation(), PROJECT_NAME);
+		weightBaseDisplayer.setControlledCoords(steakoutControl.getControlledCoords());
+		}
+		
+		steakoutControlWindow.steakoutControlFrame.setVisible(false);
+	}
+	
+	private static PointID getPointID(String value) {
+		
+		switch (value) {
+		case "elõtag":
+			return PointID.PREFIX;
+		case "utótag":
+			return PointID.POSTFIX;
+		default:
+			return PointID.POINT_ID;
 		}
 	}
 	

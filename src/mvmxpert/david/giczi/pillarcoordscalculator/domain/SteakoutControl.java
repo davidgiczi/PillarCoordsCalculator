@@ -22,7 +22,7 @@ public class SteakoutControl {
 		this.delimiter = delimiter;
 	}
 	
-	public void controlSteakout() {
+	public void controlSteakout(boolean printed) {
 		controlledCoords = new ArrayList<>();
 		List<String> steakoutedPointData = FileProcess.getSteakoutedPointData();
 		for (String controlData : steakoutedPointData) { 
@@ -35,7 +35,9 @@ public class SteakoutControl {
 									designedCoords.getY_coord(), 
 									Double.parseDouble(data[1]),
 									Double.parseDouble(data[2]));
+					if(printed) {
 					FileProcess.saveSteakoutPoint(controlPoint.getSteakoutedPointData());
+					}
 					controlledCoords.add(controlPoint);
 				}
 			}

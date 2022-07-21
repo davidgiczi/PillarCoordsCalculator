@@ -38,7 +38,7 @@ public class HomeWindow {
 		JMenu menu1 = new JMenu("Projekt beolvasása/létrehozása");
 		menu1.setForeground(textColor);
 		menu1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		menu1.addMenuListener(new CreateProjectListener());
+		menu1.addMouseListener(new CreateProjectListener());
 		steakoutMenu = new JMenu("Alap adatainak megadása");
 		steakoutMenu.setForeground(textColor);
 		steakoutMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
