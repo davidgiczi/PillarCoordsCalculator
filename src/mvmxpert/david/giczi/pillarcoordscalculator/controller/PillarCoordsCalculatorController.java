@@ -45,7 +45,7 @@ public class PillarCoordsCalculatorController {
 			FileProcess.setFolder();
 			if(FileProcess.FOLDER_PATH != null) {
 			homeWindow.steakoutMenu.setEnabled(true);
-			clearInputWindow();
+			init();
 			if( FileProcess.isProjectFileExist() ) {
 				getInfoMessage("\"" + PROJECT_NAME + "\"" + " projekt",
 						"Létezõ " + getBaseType() +" projekt.");
@@ -475,7 +475,11 @@ public class PillarCoordsCalculatorController {
 		steakoutControlWindow.steakoutControlFrame.setVisible(false);
 	}
 	
-	private static void clearInputWindow() {
+	private static void init() {
+		
+		plateBaseCoordsCalculator = null;
+		weightBaseCoordsCalculator = null;
+		homeWindow.controlSteakoutMenu.setEnabled(false);
 		
 		if( plateBaseInputWindow !=null ) {
 			
