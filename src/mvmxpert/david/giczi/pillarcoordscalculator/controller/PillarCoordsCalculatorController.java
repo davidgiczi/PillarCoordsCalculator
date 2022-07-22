@@ -66,6 +66,7 @@ public class PillarCoordsCalculatorController {
 		if( FileProcess.isProjectFileExist() ) {
 			getInfoMessage("\"" + PROJECT_NAME + "\"" + " projekt",
 					"Létezõ " + getBaseType() +" projekt megnyitva.");
+			setProjectFileData();
 		}
 	}
 	
@@ -371,6 +372,7 @@ public class PillarCoordsCalculatorController {
 	
 		if( plateBaseInputWindow !=null && !projectFileData.isEmpty() && "#PlateBase".equals(projectFileData.get(0)) ) {
 			
+			plateBaseInputWindow.inputFrameForPlateBase.setTitle(PROJECT_NAME);
 			plateBaseInputWindow.centerIdField.setText(projectFileData.get(1));
 			plateBaseInputWindow.x_centerField.setText(projectFileData.get(2));
 			plateBaseInputWindow.y_centerField.setText(projectFileData.get(3));
@@ -391,6 +393,7 @@ public class PillarCoordsCalculatorController {
 		}
 		else if(weightBaseInputWindow !=null && !projectFileData.isEmpty() && "#WeightBase".equals(projectFileData.get(0)) ) {
 			
+			weightBaseInputWindow.inputFrameForWeightBase.setTitle(PROJECT_NAME);
 			weightBaseInputWindow.centerIdField.setText(projectFileData.get(1));
 			weightBaseInputWindow.x_centerField.setText(projectFileData.get(2));
 			weightBaseInputWindow.y_centerField.setText(projectFileData.get(3));
