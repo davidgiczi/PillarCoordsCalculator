@@ -425,6 +425,14 @@ public class WeightBaseDisplayer extends JFrame {
 				new AzimuthAndDistance(pillarBasePoints.get(5), pillarBasePoints.get(7));
 		double horizontalSize = horizontalPathDistance.calcDistance() - horizontalHoleDistance.calcDistance();
 		g2d.drawString(df.format(horizontalSize) + "m", (int) (x - verticalPath / 2) - 100, (int) y);
+		
+		g2d.drawString(df.format(horizontalHoleDistance.calcDistance()) + "m", 
+				(int) (x - verticalPath / 2  + verticalHoleSize / 2 - 10), (int) (y - (horizontalPath / 2 - horizontalHoleSize + 5)));
+		
+		g2d.rotate(Math.PI / 2, x, y);
+		g2d.drawString(df.format(verticalHoleDistance.calcDistance()) + "m", 
+				(int) (x - verticalPath / 2 + 10), (int) (y + horizontalPath / 2 - 5));
+		g2d.rotate(-Math.PI / 2, x, y);
 	
 	}
 	
@@ -434,7 +442,7 @@ public class WeightBaseDisplayer extends JFrame {
 		double horizontalPath = 
 				new AzimuthAndDistance(transformedPillarBasePoints.get(5), transformedPillarBasePoints.get(7)).calcDistance();
 		if( rotation == 0) {
-	        PolarPoint polarPoint1 = new PolarPoint(origin, 100,
+	        PolarPoint polarPoint1 = new PolarPoint(origin, horizontalPath + 30,
 	        		 0, "baseLine");
 	        PolarPoint polarPoint2 = new PolarPoint(polarPoint1.calcPolarPoint(), 30,
 	        		  3 * Math.PI / 4, "arrow");
@@ -488,8 +496,6 @@ public class WeightBaseDisplayer extends JFrame {
 	  	 g2d.drawString(directionDisplayerPoint.getPointID(),
 	        		(int) polarPoint1.calcPolarPoint().getX_coord(), (int) polarPoint1.calcPolarPoint().getY_coord() + 50);
 	        }
-		
-		
 		g2d.setColor(Color.BLACK);
 	}
 	

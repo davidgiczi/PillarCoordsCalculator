@@ -12,7 +12,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import mvmxpert.david.giczi.pillarcoordscalculator.controller.PillarCoordsCalculatorController;
-import mvmxpert.david.giczi.pillarcoordscalculator.listeners.CreateProjectListener;
 import mvmxpert.david.giczi.pillarcoordscalculator.listeners.CreateSteakoutWindowListener;
 
 public class HomeWindow {
@@ -35,10 +34,31 @@ public class HomeWindow {
 	}
 	
 	private void addMenu() {
-		JMenu menu1 = new JMenu("Projekt beolvasása/létrehozása");
+		JMenu menu1 = new JMenu("Projekt létrehozása/megnyitása");
 		menu1.setForeground(textColor);
 		menu1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		menu1.addMouseListener(new CreateProjectListener());
+		JMenuItem item11 = new JMenuItem("Projekt megnyitása");
+		item11.setForeground(textColor);
+		item11.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		item11.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PillarCoordsCalculatorController.setProject();
+			}
+		});
+		JMenuItem item12 = new JMenuItem("Új projekt létrehozása");
+		item12.setForeground(textColor);
+		item12.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		item12.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PillarCoordsCalculatorController.setProjectName();
+			}
+		});
+		menu1.add(item11);
+		menu1.add(item12);
 		steakoutMenu = new JMenu("Alap adatainak megadása");
 		steakoutMenu.setForeground(textColor);
 		steakoutMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));

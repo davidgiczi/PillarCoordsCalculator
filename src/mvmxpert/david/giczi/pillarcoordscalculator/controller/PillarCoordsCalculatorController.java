@@ -57,6 +57,18 @@ public class PillarCoordsCalculatorController {
 		
 	}
 	
+	public static void setProject() {
+		FileProcess.setProject();
+		if( PROJECT_NAME == null) {
+			return;
+		}
+		homeWindow.steakoutMenu.setEnabled(true);
+		if( FileProcess.isProjectFileExist() ) {
+			getInfoMessage("\"" + PROJECT_NAME + "\"" + " projekt",
+					"Létezõ " + getBaseType() +" projekt megnyitva.");
+		}
+	}
+	
 	public static void getPlateBaseInputWindow() {
 		if(plateBaseInputWindow == null) {
 		plateBaseInputWindow = new PlateBaseInputWindow(PROJECT_NAME);

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
@@ -167,6 +168,32 @@ public class FileProcess {
 			FOLDER_PATH = selectedFile.getAbsolutePath();
 		}
 	}
+	
+	public static void setProject() {
+		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		jfc.setDialogTitle("Válassz projekt fájlt.");
+		jfc.setFileFilter(new FileFilter() {
+			@Override
+			public String getDescription() {
+				return "*.pcc fájlok";
+			}
+			
+			@Override
+			public boolean accept(File f) {
+				return f.isDirectory() || f.getName().toLowerCase().endsWith(".pcc");
+			}
+		});
+		
+		int returnValue = jfc.showOpenDialog(null);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = jfc.getSelectedFile();
+			FOLDER_PATH = selectedFile.getParent();
+			PillarCoordsCalculatorController.PROJECT_NAME = 
+					selectedFile.getName().substring(0, selectedFile.getName().indexOf('.'));
+		}
+	}
+	
+	
 	
 	public static void setSteakoutFile() {
 			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
