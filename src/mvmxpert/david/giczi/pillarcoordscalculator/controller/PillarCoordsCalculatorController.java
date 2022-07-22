@@ -45,6 +45,7 @@ public class PillarCoordsCalculatorController {
 			FileProcess.setFolder();
 			if(FileProcess.FOLDER_PATH != null) {
 			homeWindow.steakoutMenu.setEnabled(true);
+			clearInputWindow();
 			if( FileProcess.isProjectFileExist() ) {
 				getInfoMessage("\"" + PROJECT_NAME + "\"" + " projekt",
 						"Létezõ " + getBaseType() +" projekt.");
@@ -472,6 +473,52 @@ public class PillarCoordsCalculatorController {
 		}
 		
 		steakoutControlWindow.steakoutControlFrame.setVisible(false);
+	}
+	
+	private static void clearInputWindow() {
+		
+		if( plateBaseInputWindow !=null ) {
+			
+			plateBaseInputWindow.inputFrameForPlateBase.setTitle(PROJECT_NAME);
+			plateBaseInputWindow.centerIdField.setText(null);
+			plateBaseInputWindow.x_centerField.setText(null);
+			plateBaseInputWindow.y_centerField.setText(null);
+			plateBaseInputWindow.directionIdField.setText(null);
+			plateBaseInputWindow.x_directionField.setText(null);
+			plateBaseInputWindow.y_directionField.setText(null);
+			plateBaseInputWindow.horizontalSizeOfHoleField.setText(null);
+			plateBaseInputWindow.verticalSizeOfHoleField.setText(null);
+			plateBaseInputWindow.horizontalDistanceFromHoleSideField.setText(null);
+			plateBaseInputWindow.verticalDistanceFromHoleSideField.setText(null);
+			plateBaseInputWindow.rotateAngularField
+			.setText(null);
+			plateBaseInputWindow.rotateAngularMinField
+			.setText(null);
+			plateBaseInputWindow.rotateAngularSecField
+			.setText(null);
+		
+		}
+		else if( weightBaseInputWindow !=null ) {
+			
+			weightBaseInputWindow.inputFrameForWeightBase.setTitle(PROJECT_NAME);
+			weightBaseInputWindow.centerIdField.setText(null);
+			weightBaseInputWindow.x_centerField.setText(null);
+			weightBaseInputWindow.y_centerField.setText(null);
+			weightBaseInputWindow.directionIdField.setText(null);
+			weightBaseInputWindow.x_directionField.setText(null);
+			weightBaseInputWindow.y_directionField.setText(null);
+			weightBaseInputWindow.directionSizeField.setText(null);
+			weightBaseInputWindow.horizontalSizeForPillarLegField.setText(null);
+			weightBaseInputWindow.verticalSizeForPillarLegField.setText(null);
+			weightBaseInputWindow.horizontalSizeForHoleField.setText(null);
+			weightBaseInputWindow.verticalSizeForHoleField.setText(null);
+			weightBaseInputWindow.rotateAngularField
+			.setText(null);
+			weightBaseInputWindow.rotateAngularMinField
+			.setText(null);
+			weightBaseInputWindow.rotateAngularSecField
+			.setText(null);
+		}
 	}
 	
 	private static PointID getPointID(String value) {
